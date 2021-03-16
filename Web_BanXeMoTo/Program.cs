@@ -14,6 +14,7 @@ namespace Web_BanXeMoTo
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //fix
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
