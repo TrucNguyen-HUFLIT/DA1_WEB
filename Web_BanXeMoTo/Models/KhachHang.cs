@@ -19,7 +19,7 @@ namespace Web_BanXeMoTo.Models
         public string IdloaiKh { get; set; }
         public string TenKh { get; set; }
         public string DiaChi { get; set; }
-        public int DienThoai { get; set; }
+        public string DienThoai { get; set; }
         public string Avatar { get; set; }
 
         public virtual LoaiKh IdloaiKhNavigation { get; set; }

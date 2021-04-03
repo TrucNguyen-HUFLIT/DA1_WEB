@@ -17,7 +17,6 @@ namespace Web_BanXeMoTo.Models
         {
         }
 
-        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<ChiTietDanhGium> ChiTietDanhGia { get; set; }
         public virtual DbSet<ChiTietHd> ChiTietHds { get; set; }
         public virtual DbSet<DatLich> DatLiches { get; set; }
@@ -26,6 +25,7 @@ namespace Web_BanXeMoTo.Models
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
         public virtual DbSet<LoaiKh> LoaiKhs { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<MauXe> MauXes { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
@@ -43,38 +43,6 @@ namespace Web_BanXeMoTo.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
-            modelBuilder.Entity<Admin>(entity =>
-            {
-                entity.HasKey(e => e.Idad);
-
-                entity.ToTable("Admin");
-
-                entity.Property(e => e.Idad)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDAd");
-
-                entity.Property(e => e.Cmnd).HasColumnName("CMND");
-
-                entity.Property(e => e.DiaChi).HasMaxLength(100);
-
-                entity.Property(e => e.Idtk)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDTK");
-
-                entity.Property(e => e.TenAd)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.HasOne(d => d.IdtkNavigation)
-                    .WithMany(p => p.Admins)
-                    .HasForeignKey(d => d.Idtk)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Admin_TaiKhoan");
-            });
 
             modelBuilder.Entity<ChiTietDanhGium>(entity =>
             {
@@ -231,11 +199,14 @@ namespace Web_BanXeMoTo.Models
                     .IsUnicode(false)
                     .HasColumnName("IDKH");
 
-                entity.Property(e => e.Avatar)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.Avatar).IsUnicode(false);
 
                 entity.Property(e => e.DiaChi).HasMaxLength(100);
+
+                entity.Property(e => e.DienThoai)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdloaiKh)
                     .IsRequired()
@@ -308,6 +279,46 @@ namespace Web_BanXeMoTo.Models
                     .HasConstraintName("FK_LoaiKH_KhuyenMai");
             });
 
+            modelBuilder.Entity<Manager>(entity =>
+            {
+                entity.HasKey(e => e.Idad);
+
+                entity.ToTable("Manager");
+
+                entity.Property(e => e.Idad)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("IDAd");
+
+                entity.Property(e => e.Cmnd)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("CMND");
+
+                entity.Property(e => e.DiaChi).HasMaxLength(100);
+
+                entity.Property(e => e.DienThoai)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Idtk)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("IDTK");
+
+                entity.Property(e => e.TenAd)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.IdtkNavigation)
+                    .WithMany(p => p.Managers)
+                    .HasForeignKey(d => d.Idtk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Manager_TaiKhoan");
+            });
+
             modelBuilder.Entity<MauXe>(entity =>
             {
                 entity.HasKey(e => e.Idmau);
@@ -323,16 +334,11 @@ namespace Web_BanXeMoTo.Models
 
                 entity.Property(e => e.HinhAnh1)
                     .IsRequired()
-                    .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.HinhAnh2)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.HinhAnh2).IsUnicode(false);
 
-                entity.Property(e => e.HinhAnh3)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.HinhAnh3).IsUnicode(false);
 
                 entity.Property(e => e.Idhang)
                     .IsRequired()
@@ -374,19 +380,22 @@ namespace Web_BanXeMoTo.Models
                     .IsUnicode(false)
                     .HasColumnName("IDNV");
 
-                entity.Property(e => e.Avatar)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                entity.Property(e => e.Avatar).IsUnicode(false);
 
                 entity.Property(e => e.Cmnd)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(20)
                     .IsUnicode(false)
                     .HasColumnName("CMND");
 
                 entity.Property(e => e.DiaChi)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.DienThoai)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Idtk)
                     .IsRequired()

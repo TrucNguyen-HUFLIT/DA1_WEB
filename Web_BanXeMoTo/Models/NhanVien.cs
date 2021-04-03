@@ -10,7 +10,7 @@ namespace Web_BanXeMoTo.Models
         public string Idnv { get; set; }
         public string Idtk { get; set; }
         public string TenNv { get; set; }
-        public int DienThoai { get; set; }
+        public string DienThoai { get; set; }
         public string DiaChi { get; set; }
         public string Cmnd { get; set; }
         public string Avatar { get; set; }
