@@ -17,7 +17,7 @@ namespace Web_BanXeMoTo.Models
         {
         }
 
-        public virtual DbSet<ChiTietDanhGium> ChiTietDanhGia { get; set; }
+        public virtual DbSet<ChiTietDg> ChiTietDgs { get; set; }
         public virtual DbSet<ChiTietHd> ChiTietHds { get; set; }
         public virtual DbSet<DatLich> DatLiches { get; set; }
         public virtual DbSet<Hang> Hangs { get; set; }
@@ -44,9 +44,12 @@ namespace Web_BanXeMoTo.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<ChiTietDanhGium>(entity =>
+            modelBuilder.Entity<ChiTietDg>(entity =>
             {
-                entity.HasKey(e => new { e.Idkh, e.Idmau });
+                entity.HasKey(e => new { e.Idkh, e.Idmau })
+                    .HasName("PK_ChiTietDanhGia");
+
+                entity.ToTable("ChiTietDG");
 
                 entity.Property(e => e.Idkh)
                     .HasMaxLength(50)
@@ -63,16 +66,10 @@ namespace Web_BanXeMoTo.Models
                     .HasColumnName("NoiDungDG");
 
                 entity.HasOne(d => d.IdkhNavigation)
-                    .WithMany(p => p.ChiTietDanhGia)
+                    .WithMany(p => p.ChiTietDgs)
                     .HasForeignKey(d => d.Idkh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ChiTietDanhGia_KhachHang");
-
-                entity.HasOne(d => d.IdmauNavigation)
-                    .WithMany(p => p.ChiTietDanhGia)
-                    .HasForeignKey(d => d.Idmau)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ChiTietDanhGia_MauXe");
+                    .HasConstraintName("FK_ChiTietDG_KhachHang");
             });
 
             modelBuilder.Entity<ChiTietHd>(entity =>
@@ -351,6 +348,8 @@ namespace Web_BanXeMoTo.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("IDKM");
+
+                entity.Property(e => e.MoTa).IsRequired();
 
                 entity.Property(e => e.TenXe)
                     .IsRequired()

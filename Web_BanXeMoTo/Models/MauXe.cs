@@ -9,7 +9,6 @@ namespace Web_BanXeMoTo.Models
     {
         public MauXe()
         {
-            ChiTietDanhGia = new HashSet<ChiTietDanhGium>();
             DatLiches = new HashSet<DatLich>();
             Xes = new HashSet<Xe>();
         }
@@ -23,10 +22,10 @@ namespace Web_BanXeMoTo.Models
         public string HinhAnh2 { get; set; }
         public string HinhAnh3 { get; set; }
         public int BaoHanh { get; set; }
+        public string MoTa { get; set; }
 
         public virtual Hang IdhangNavigation { get; set; }
         public virtual KhuyenMai IdkmNavigation { get; set; }
-        public virtual ICollection<ChiTietDanhGium> ChiTietDanhGia { get; set; }
         public virtual ICollection<DatLich> DatLiches { get; set; }
         public virtual ICollection<Xe> Xes { get; set; }
     }
