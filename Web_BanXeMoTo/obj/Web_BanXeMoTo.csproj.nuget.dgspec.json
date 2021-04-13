@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\DA1_WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {}
+    "D:\\DOAN1-LAN1\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {}
   },
   "projects": {
-    "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\DA1_WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {
+    "D:\\DOAN1-LAN1\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\DA1_WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+        "projectUniqueName": "D:\\DOAN1-LAN1\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
         "projectName": "Web_BanXeMoTo",
-        "projectPath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\DA1_WEB\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "F:\\HUFLIT-EDU\\năm3\\Semester2\\DA1-CNPMNC\\DA1_WEB\\Web_BanXeMoTo\\obj\\",
+        "projectPath": "D:\\DOAN1-LAN1\\Web_BanXeMoTo\\Web_BanXeMoTo.csproj",
+        "packagesPath": "C:\\Users\\Nam\\.nuget\\packages\\",
+        "outputPath": "D:\\DOAN1-LAN1\\Web_BanXeMoTo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -53,6 +53,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.4, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -73,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

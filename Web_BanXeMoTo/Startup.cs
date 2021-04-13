@@ -26,7 +26,8 @@ namespace Web_BanXeMoTo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Data Source=QLMoTo.dbo"));
+            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,8 +54,9 @@ namespace Web_BanXeMoTo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Manager}/{action=Index}/{id?}");
+                    pattern: "{controller=Customer}/{action=Index}/{id?}");
             });
+
         }
     }
 }
