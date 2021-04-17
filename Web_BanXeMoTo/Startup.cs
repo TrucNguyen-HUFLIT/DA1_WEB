@@ -53,7 +53,7 @@ namespace Web_BanXeMoTo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Customer}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Products}/{id?}");
             });
         }
     }

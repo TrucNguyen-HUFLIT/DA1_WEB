@@ -207,5 +207,7 @@ D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_
 D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.Views.pdb
 D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.csproj.CopyComplete
 D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.genruntimeconfig.cache
-D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Index.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.csprojAssemblyReference.cache
+D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Shared\_LayoutCustomer.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Products\Products.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\N_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Products\ProductsDetail.cshtml.g.cs
