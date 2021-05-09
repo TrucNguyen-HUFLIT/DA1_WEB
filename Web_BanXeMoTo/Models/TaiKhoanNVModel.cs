@@ -36,8 +36,12 @@ namespace Web_BanXeMoTo.Models
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string DienThoai { get; set; }
         [Display(Name = "Địa chỉ")]
+        [Required(ErrorMessage = "Không được bỏ trống")]
+
         public string DiaChi { get; set; }
         [Display(Name = "CMND")]
+        [Required(ErrorMessage = "Không được bỏ trống")]
+
         public string Cmnd { get; set; }
         [Display(Name = "Avatar")]
         public string Avatar { get; set; }

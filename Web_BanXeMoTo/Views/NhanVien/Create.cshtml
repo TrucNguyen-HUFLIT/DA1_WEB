@@ -64,6 +64,16 @@
                             <input asp-for="tknv.Idtk" class="form-control" />
                             <span asp-validation-for="tknv.Idtk" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="tknv.Email" class="control-label"></label>
+                            <input asp-for="tknv.Email" class="form-control" />
+                            <span asp-validation-for="tknv.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tknv.Pass" class="control-label"></label>
+                            <input asp-for="tknv.Pass" class="form-control" />
+                            <span asp-validation-for="tknv.Pass" class="text-danger"></span>
+                        </div>
                         <partial name="_FormEdit" model="Model" />
                         <div class="form-group">
                             <input type="submit" value="Thêm" class="btn btn-primary" />

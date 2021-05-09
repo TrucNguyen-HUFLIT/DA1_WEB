@@ -12,5 +12,6 @@ namespace Web_BanXeMoTo.Models
         public string NoiDungDg { get; set; }
 
         public virtual KhachHang IdkhNavigation { get; set; }
+        public virtual MauXe IdmauNavigation { get; set; }
     }
 }

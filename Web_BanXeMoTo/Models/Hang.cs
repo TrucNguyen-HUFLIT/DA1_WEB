@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 #nullable disable
 
 namespace Web_BanXeMoTo.Models
@@ -15,7 +14,7 @@ namespace Web_BanXeMoTo.Models
             MauXes = new HashSet<MauXe>();
         }
 
-        [Display(Name ="ID Hãng")]
+        [Display(Name = "ID Hãng")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string Idhang { get; set; }
 
@@ -27,6 +26,5 @@ namespace Web_BanXeMoTo.Models
 
         [NotMapped]
         public List<Hang> ListHang { get; set; }
-
     }
 }

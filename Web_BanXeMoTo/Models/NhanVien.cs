@@ -13,9 +13,12 @@ namespace Web_BanXeMoTo.Models
         [Display(Name = "ID Nhân viên")]
         [Required(ErrorMessage = "Không được bỏ trống, không được trùng lặp")]
         public string Idnv { get; set; }
-        [Display(Name = "ID Tài khoản")]
-        [Required(ErrorMessage = "Không được bỏ trống")]
-        public string Idtk { get; set; }
+        [Display(Name = "Loại Tài Khoản")]
+        public string Idtype { get; set; }
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        [Display(Name = "Password")]
+        public string Pass { get; set; }
         [Display(Name = "Tên nhân viên")]
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string TenNv { get; set; }
@@ -29,8 +32,11 @@ namespace Web_BanXeMoTo.Models
         public string Cmnd { get; set; }
         [Display(Name = "Avatar")]
         public string Avatar { get; set; }
+        [Display(Name = "ID Role")]
+        public string Idrole { get; set; }
 
-        public virtual TaiKhoan IdtkNavigation { get; set; }
+        public virtual Role IdroleNavigation { get; set; }
+        public virtual TypeAcc IdtypeNavigation { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "Hãy chọn hình")]
         public IFormFile UpLoadAvt { get; set; }

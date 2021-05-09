@@ -15,7 +15,6 @@ namespace Web_BanXeMoTo.Models
         public string Idhd { get; set; }
         public string Idkh { get; set; }
         public DateTime NgayDat { get; set; }
-        public decimal TongTien { get; set; }
 
         public virtual KhachHang IdkhNavigation { get; set; }
         public virtual ICollection<ChiTietHd> ChiTietHds { get; set; }
