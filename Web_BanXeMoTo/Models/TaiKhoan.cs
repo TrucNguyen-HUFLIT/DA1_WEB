@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Web_BanXeMoTo.Models
 {
+    //bảng này dưới CSDL đã bỏ
     public partial class TaiKhoan
     {
         public TaiKhoan()

@@ -36,15 +36,24 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <div class="card-img ">
-                                <img src="@(Model.tknv.Avatar != null? Url.Content("/img/" +Model.tknv.Avatar) :"/img/icon.png")" height="200px" width="200px" id="previewImg" />
+                                @*<img src="@(Model.tknv.Avatar != null? Url.Content("/img/" +Model.tknv.Avatar) :"/img/icon.png")" height="200" width="200" id="previewImg" />*@
+                                @if (Model.tknv != null)
+                                {
+                                    <img src="@("~/img/" + Model.tknv.Avatar)" asp-append-version="true" height="200" width="200" id="previewImg" />
+                                }
+                                @*else
+                                {
+                                    <img src="/img/icon.png" asp-append-version="true" height="200" width="200" id="previewImg" />
+
+                                }*@
                             </div>
+
                             @*<img src="@("/img/"+Model.tknv.Avatar != null? Url.Content("/img/"+Model.tknv.Avatar) :"/img/icon.png")" height="200px" width="200px" id="previewImg" />*@
                             @*@{ var src = Model.tknv?.Avatar != null ? Url.Content(Model.tknv.Avatar) : "icon.png";
-                                    src = "/img/" + src;
-                                    <img src="@src" asp-append-version="true" height="200" width="200" id="previewImg" />
-                                }*@
+            src = "/img/" + src;
+            <img src="@src" asp-append-version="true" height="200" width="200" id="previewImg" />
+        }*@
                         </div>
-
                         <input asp-for="tknv.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />
                         <div class="form-group">
                             <label asp-for="tknv.Idnv" class="control-label"></label>
@@ -55,6 +64,14 @@
                             <label asp-for="tknv.Idtk" class="control-label"></label>
                             <input asp-for="tknv.Idtk" class="form-control" readonly />
                             <span asp-validation-for="tknv.Idtk" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="tknv.Email" class="control-label"></label>
+                            <input asp-for="tknv.Email" class="form-control" readonly />
+                            <span asp-validation-for="tknv.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="tknv.Pass" class="form-control" readonly hidden />
                         </div>
                         <partial name="_FormEdit" model="Model" />
                         <div class="form-group">

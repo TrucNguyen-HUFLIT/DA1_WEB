@@ -89,7 +89,6 @@ namespace Web_BanXeMoTo.Controllers
 
             model.tknv = new TaiKhoanNVModel();
             model.nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault();
-
             model.taiKhoan = database.TaiKhoans.Where(x => x.Idtk == model.nhanVien.Idtk).FirstOrDefault();
             model.tknv.Idnv = model.nhanVien.Idnv;
             model.tknv.Idtk = model.taiKhoan.Idtk;
@@ -107,35 +106,43 @@ namespace Web_BanXeMoTo.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, NhanVien nhanVien)
+        public async Task<IActionResult> Edit(string id, TaiKhoanNVModel tknv)
         {
             var model = new ViewModelNV();
-            model.tknv = new TaiKhoanNVModel();
-            model.nhanVien = nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault();
-            return View(model);
-            string wwwRootPath = hostEnvironment.WebRootPath;
-            string fileName1;
-            string extension1;
-            if (nhanVien.UpLoadAvt == null)
+            model.nhanVien  = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault();
+            model.tknv = tknv;
+            model.tknv.Avatar = model.nhanVien.Avatar;
+            if (tknv.TenNv != null && tknv.DienThoai != null && tknv.DiaChi != null && tknv.Cmnd != null)
             {
-                fileName1 = Path.GetFileNameWithoutExtension(model.nhanVien.Avatar);
-                extension1 = Path.GetExtension(model.nhanVien.Avatar);
-                nhanVien.Avatar = fileName1 += extension1;
-            }
-            else
-            {
-                fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
-                extension1 = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
-                nhanVien.Avatar = fileName1 += extension1;
-                string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
-                using (var fileStream = new FileStream(path1, FileMode.Create))
+                string wwwRootPath = hostEnvironment.WebRootPath;
+                string fileName1;
+                string extension1;
+                model.nhanVien.TenNv = tknv.TenNv;
+                model.nhanVien.DienThoai = tknv.DienThoai;
+                model.nhanVien.DiaChi = tknv.DiaChi;
+                model.nhanVien.Cmnd = tknv.Cmnd;
+                if (tknv.UpLoadAvt == null)
                 {
-                    await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
+                    fileName1 = Path.GetFileNameWithoutExtension(model.nhanVien.Avatar);
+                    extension1 = Path.GetExtension(model.nhanVien.Avatar);
+                    model.nhanVien.Avatar = fileName1 += extension1;
                 }
+                else
+                {
+                    fileName1 = Path.GetFileNameWithoutExtension(tknv.UpLoadAvt.FileName);
+                    extension1 = Path.GetExtension(tknv.UpLoadAvt.FileName);
+                    model.nhanVien.Avatar = fileName1 += extension1;
+                    string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
+                    using (var fileStream = new FileStream(path1, FileMode.Create))
+                    {
+                        await tknv.UpLoadAvt.CopyToAsync(fileStream);
+                    }
+                }
+                database.Update(model.nhanVien);
+                await database.SaveChangesAsync();
+                return RedirectToAction("Index", "NhanVien");
             }
-            database.Update(model.nhanVien);
-            await database.SaveChangesAsync();
-            return RedirectToAction("Index", "NhanVien");
+            return View(model);
         }
 
     }

@@ -7,6 +7,7 @@ namespace Web_BanXeMoTo.Models
 {
     public partial class LoaiKh
     {
+        //bảng này dưới CSDL đã bỏ
         public LoaiKh()
         {
             KhachHangs = new HashSet<KhachHang>();

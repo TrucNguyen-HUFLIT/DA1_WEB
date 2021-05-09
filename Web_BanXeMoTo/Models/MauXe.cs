@@ -12,6 +12,7 @@ namespace Web_BanXeMoTo.Models
     {
         public MauXe()
         {
+            ChiTietDgs = new HashSet<ChiTietDg>();
             DatLiches = new HashSet<DatLich>();
             Xes = new HashSet<Xe>();
         }
@@ -52,8 +53,12 @@ namespace Web_BanXeMoTo.Models
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string MoTa { get; set; }
 
+        [Display(Name = "Trạng thái")]
+        public bool? TrangThai { get; set; }
+
         public virtual Hang IdhangNavigation { get; set; }
         public virtual KhuyenMai IdkmNavigation { get; set; }
+        public virtual ICollection<ChiTietDg> ChiTietDgs { get; set; }
         public virtual ICollection<DatLich> DatLiches { get; set; }
         public virtual ICollection<Xe> Xes { get; set; }
         [NotMapped]

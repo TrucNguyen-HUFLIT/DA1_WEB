@@ -24,13 +24,12 @@ namespace Web_BanXeMoTo.Models
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
-        public virtual DbSet<LoaiKh> LoaiKhs { get; set; }
-        //public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<MauXe> MauXes { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
-        public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<TypeAcc> TypeAccs { get; set; }
         public virtual DbSet<Xe> Xes { get; set; }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -70,6 +69,12 @@ namespace Web_BanXeMoTo.Models
                     .HasForeignKey(d => d.Idkh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ChiTietDG_KhachHang");
+
+                entity.HasOne(d => d.IdmauNavigation)
+                    .WithMany(p => p.ChiTietDgs)
+                    .HasForeignKey(d => d.Idmau)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ChiTietDG_MauXe");
             });
 
             modelBuilder.Entity<ChiTietHd>(entity =>
@@ -88,7 +93,7 @@ namespace Web_BanXeMoTo.Models
                     .IsUnicode(false)
                     .HasColumnName("IDXe");
 
-                entity.Property(e => e.ThanhTien).HasColumnType("money");
+                entity.Property(e => e.GiaBan).HasColumnType("money");
 
                 entity.HasOne(d => d.IdhdNavigation)
                     .WithMany(p => p.ChiTietHds)
@@ -176,8 +181,6 @@ namespace Web_BanXeMoTo.Models
 
                 entity.Property(e => e.NgayDat).HasColumnType("date");
 
-                entity.Property(e => e.TongTien).HasColumnType("money");
-
                 entity.HasOne(d => d.IdkhNavigation)
                     .WithMany(p => p.HoaDons)
                     .HasForeignKey(d => d.Idkh)
@@ -205,34 +208,32 @@ namespace Web_BanXeMoTo.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdloaiKh)
+                entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDLoaiKH");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Idtk)
+                entity.Property(e => e.Idtype)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false)
-                    .HasColumnName("IDTK");
+                    .HasColumnName("IDType");
+
+                entity.Property(e => e.Pass)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.TenKh)
                     .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("TenKH");
 
-                entity.HasOne(d => d.IdloaiKhNavigation)
+                entity.HasOne(d => d.IdtypeNavigation)
                     .WithMany(p => p.KhachHangs)
-                    .HasForeignKey(d => d.IdloaiKh)
+                    .HasForeignKey(d => d.Idtype)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_KhachHang_LoaiKH");
-
-                entity.HasOne(d => d.IdtkNavigation)
-                    .WithMany(p => p.KhachHangs)
-                    .HasForeignKey(d => d.Idtk)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_KhachHang_TaiKhoan");
+                    .HasConstraintName("FK_KhachHang_Type");
             });
 
             modelBuilder.Entity<KhuyenMai>(entity =>
@@ -247,75 +248,6 @@ namespace Web_BanXeMoTo.Models
                     .HasColumnName("IDKM");
             });
 
-            modelBuilder.Entity<LoaiKh>(entity =>
-            {
-                entity.HasKey(e => e.IdloaiKh);
-
-                entity.ToTable("LoaiKH");
-
-                entity.Property(e => e.IdloaiKh)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDLoaiKH");
-
-                entity.Property(e => e.Idkm)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDKM");
-
-                entity.Property(e => e.TenLoaiKh)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("TenLoaiKH");
-
-                entity.HasOne(d => d.IdkmNavigation)
-                    .WithMany(p => p.LoaiKhs)
-                    .HasForeignKey(d => d.Idkm)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LoaiKH_KhuyenMai");
-            });
-
-            //modelBuilder.Entity<Manager>(entity =>
-            //{
-            //    entity.HasKey(e => e.Idad);
-
-            //    entity.ToTable("Manager");
-
-            //    entity.Property(e => e.Idad)
-            //        .HasMaxLength(50)
-            //        .IsUnicode(false)
-            //        .HasColumnName("IDAd");
-
-            //    entity.Property(e => e.Cmnd)
-            //        .HasMaxLength(20)
-            //        .IsUnicode(false)
-            //        .HasColumnName("CMND");
-
-            //    entity.Property(e => e.DiaChi).HasMaxLength(100);
-
-            //    entity.Property(e => e.DienThoai)
-            //        .IsRequired()
-            //        .HasMaxLength(20)
-            //        .IsUnicode(false);
-
-            //    entity.Property(e => e.Idtk)
-            //        .IsRequired()
-            //        .HasMaxLength(50)
-            //        .IsUnicode(false)
-            //        .HasColumnName("IDTK");
-
-            //    entity.Property(e => e.TenAd)
-            //        .IsRequired()
-            //        .HasMaxLength(100);
-
-            //    entity.HasOne(d => d.IdtkNavigation)
-            //        .WithMany(p => p.Managers)
-            //        .HasForeignKey(d => d.Idtk)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Manager_TaiKhoan");
-            //});
-
             modelBuilder.Entity<MauXe>(entity =>
             {
                 entity.HasKey(e => e.Idmau);
@@ -329,9 +261,7 @@ namespace Web_BanXeMoTo.Models
 
                 entity.Property(e => e.GiaBan).HasColumnType("money");
 
-                entity.Property(e => e.HinhAnh1)
-                    .IsRequired()
-                    .IsUnicode(false);
+                entity.Property(e => e.HinhAnh1).IsUnicode(false);
 
                 entity.Property(e => e.HinhAnh2).IsUnicode(false);
 
@@ -396,41 +326,88 @@ namespace Web_BanXeMoTo.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Idtk)
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Idrole)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false)
-                    .HasColumnName("IDTK");
+                    .HasColumnName("IDRole");
+
+                entity.Property(e => e.Idtype)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("IDType");
+
+                entity.Property(e => e.Pass)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.TenNv)
                     .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("TenNV");
 
-                entity.HasOne(d => d.IdtkNavigation)
+                entity.HasOne(d => d.IdroleNavigation)
                     .WithMany(p => p.NhanViens)
-                    .HasForeignKey(d => d.Idtk)
+                    .HasForeignKey(d => d.Idrole)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_NhanVien_TaiKhoan");
+                    .HasConstraintName("FK_NhanVien_NhanVien");
+
+                entity.HasOne(d => d.IdtypeNavigation)
+                    .WithMany(p => p.NhanViens)
+                    .HasForeignKey(d => d.Idtype)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_NhanVien_Type");
             });
 
-            modelBuilder.Entity<TaiKhoan>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
-                entity.HasKey(e => e.Idtk);
+                entity.HasKey(e => e.Idrole);
 
-                entity.ToTable("TaiKhoan");
+                entity.ToTable("Role");
 
-                entity.Property(e => e.Idtk)
+                entity.Property(e => e.Idrole)
                     .HasMaxLength(50)
                     .IsUnicode(false)
-                    .HasColumnName("IDTK");
+                    .HasColumnName("IDRole");
 
-                entity.Property(e => e.Email)
-                    .IsRequired()
+                entity.Property(e => e.Dskh).HasColumnName("DSKH");
+
+                entity.Property(e => e.Dsxe).HasColumnName("DSXe");
+
+                entity.Property(e => e.QlbanHang).HasColumnName("QLBanHang");
+
+                entity.Property(e => e.QldatLich).HasColumnName("QLDatLich");
+
+                entity.Property(e => e.Qlgia).HasColumnName("QLGia");
+
+                entity.Property(e => e.Qlhang).HasColumnName("QLHang");
+
+                entity.Property(e => e.Qlhd).HasColumnName("QLHD");
+
+                entity.Property(e => e.Qlmau).HasColumnName("QLMau");
+
+                entity.Property(e => e.Qlnv).HasColumnName("QLNV");
+            });
+
+            modelBuilder.Entity<TypeAcc>(entity =>
+            {
+                entity.HasKey(e => e.Idtype);
+
+                entity.ToTable("TypeAcc");
+
+                entity.Property(e => e.Idtype)
                     .HasMaxLength(50)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasColumnName("IDType");
 
-                entity.Property(e => e.Pass)
+                entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -452,6 +429,8 @@ namespace Web_BanXeMoTo.Models
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("IDMau");
+
+                entity.Property(e => e.TenXe).IsRequired();
 
                 entity.HasOne(d => d.IdmauNavigation)
                     .WithMany(p => p.Xes)
