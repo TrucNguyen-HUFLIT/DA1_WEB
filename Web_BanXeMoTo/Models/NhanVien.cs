@@ -12,7 +12,7 @@ namespace Web_BanXeMoTo.Models
     {
         [Display(Name = "ID Nhân viên")]
         [Required(ErrorMessage = "Không được bỏ trống, không được trùng lặp")]
-        public string Idnv { get; set; }
+        public int Idnv { get; set; }
         [Display(Name = "Loại Tài Khoản")]
         public string Idtype { get; set; }
         [Display(Name = "Email")]

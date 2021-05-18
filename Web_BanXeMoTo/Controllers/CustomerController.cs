@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Web_BanXeMoTo.Models;
 
 namespace Web_BanXeMoTo.Controllers
 {
+    [Authorize(Roles = "admin, staff")]
     public class CustomerController : Controller
     {
         //QLMoToContext _context = new QLMoToContext();
@@ -56,16 +58,16 @@ namespace Web_BanXeMoTo.Controllers
 
         public async Task<IActionResult> Index(string sort, string search, string currentFilter, int? pageNumber)
         {
-            ViewData["Name"] = String.IsNullOrEmpty(sort) ? "name_desc" : "";
-            ViewData["IDTK"] = String.IsNullOrEmpty(sort) ? "IDTK" : "";
-            ViewData["IDKH"] = String.IsNullOrEmpty(sort) ? "IDKH" : "";
 
+            ViewData["Name"] = String.IsNullOrEmpty(sort) ? "name_desc" : "";
+            ViewData["ID"] = String.IsNullOrEmpty(sort) ? "ID" : "";
             ViewData["search"] = search;
             var khachHangList = from s in _context.KhachHangs
                                 select s;
             if (!String.IsNullOrEmpty(search))
             {
-                khachHangList = khachHangList.Where(s => s.TenKh.Contains(search) || s.Idtk.Contains(search) || s.Idkh.Contains(search));
+                khachHangList = khachHangList.Where(s => s.TenKh.Contains(search)
+                                       || s.DiaChi.Contains(search) || s.Idkh.ToString().Contains(search));
             }
             if (search != null)
             {
@@ -80,52 +82,48 @@ namespace Web_BanXeMoTo.Controllers
                 case "name_desc":
                     khachHangList = khachHangList.OrderByDescending(s => s.TenKh);
                     break;
-                case "IDKH":
+                case "ID":
                     khachHangList = khachHangList.OrderByDescending(s => s.Idkh);
-                    break;
-                case "IDTK":
-                    khachHangList = khachHangList.OrderByDescending(s => s.Idtk);
                     break;
                 default:
                     khachHangList = khachHangList.OrderBy(s => s.TenKh);
                     break;
             }
-            //var khachhang = _context.KhachHangs
-            //    .Include(kh => kh.IdloaiKhNavigation).AsNoTracking();
-            //var kh = await _context.KhachHangs.ToListAsync();
             int pageSize = 2;
-            khachHangList = khachHangList.Include(kh => kh.IdloaiKhNavigation).AsNoTracking();
+            //khachHangList = khachHangList.Include(kh => kh.IdloaiKhNavigation).AsNoTracking();
             return View(await PaggingList<KhachHang>.CreateAsync(khachHangList, pageNumber ?? 1, pageSize));
         }
+
         public async Task<IActionResult> Detail(string id)
         {
+
             return View(await _context.KhachHangs.FindAsync(id));
 
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
-            
-            if (id == null)
+
+            if (id == 0)
             {
                 return NotFound();
             }
             var khachhang = await _context.KhachHangs
-                .Include(c => c.IdloaiKhNavigation)
+                //.Include(c => c.IdloaiKhNavigation)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Idkh == id);
             if (khachhang == null)
             {
                 return NotFound();
             }
-            Dropdownlist(khachhang.IdloaiKh);
+            //Dropdownlist(khachhang.IdloaiKh);
             return View(khachhang);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Idkh,IdloaiKh,Idtk,TenKh,DiaChi,DienThoai,Avatar,Image")] KhachHang khachhang)
+        public async Task<IActionResult> Edit(int id, [Bind("Idkh,IdloaiKh,Idtk,TenKh,DiaChi,DienThoai,Avatar,Image")] KhachHang khachhang)
         {
             if (id != khachhang.Idkh)
             {
@@ -154,11 +152,11 @@ namespace Web_BanXeMoTo.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            Dropdownlist(khachhang.IdloaiKh);
+            //Dropdownlist(khachhang.IdloaiKh);
             return View(khachhang);
         }
 
-        private bool KhachHangExists(string idkh)
+        private bool KhachHangExists(int idkh)
         {
             throw new NotImplementedException();
         }
@@ -180,13 +178,13 @@ namespace Web_BanXeMoTo.Controllers
             return uniqueFileName;
         }
 
-        private void Dropdownlist(object seleted = null)
-        {
-            var Query = from kh in _context.LoaiKhs
-                        orderby kh.TenLoaiKh
-                        select kh;
-            ViewBag.IdloaiKh = new SelectList(Query.AsNoTracking(), "IdloaiKh", "TenLoaiKh", seleted);
-        }
+        //private void Dropdownlist(object seleted = null)
+        //{
+        //    var Query = from kh in _context.LoaiKhs
+        //                orderby kh.TenLoaiKh
+        //                select kh;
+        //    ViewBag.IdloaiKh = new SelectList(Query.AsNoTracking(), "IdloaiKh", "TenLoaiKh", seleted);
+        //}
 
     }
 }

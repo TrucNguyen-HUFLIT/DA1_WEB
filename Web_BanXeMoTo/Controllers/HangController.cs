@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using Web_BanXeMoTo.Models;
 
 namespace Web_BanXeMoTo.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class HangController : Controller
     {
         private readonly QLMoToContext database;
@@ -17,6 +19,8 @@ namespace Web_BanXeMoTo.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new ViewModel();
             model.ListHang = database.Hangs.ToArray();
             model.ListMauXe = database.MauXes.ToArray();
@@ -25,6 +29,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new Hang();
 
             return View(model);
@@ -53,6 +59,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Edit(string id)
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new Hang();
             model = database.Hangs.Where(x => x.Idhang == id).FirstOrDefault();
             return View(model);

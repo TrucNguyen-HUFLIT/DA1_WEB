@@ -13,7 +13,7 @@ namespace Web_BanXeMoTo.Models
         }
 
         public string Idhd { get; set; }
-        public string Idkh { get; set; }
+        public int Idkh { get; set; }
         public DateTime NgayDat { get; set; }
 
         public virtual KhachHang IdkhNavigation { get; set; }

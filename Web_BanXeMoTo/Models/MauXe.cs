@@ -29,7 +29,6 @@ namespace Web_BanXeMoTo.Models
 
         [Display(Name = "Tên xe")]
         [Required(ErrorMessage = "Không được bỏ trống")]
-
         public string TenXe { get; set; }
 
         [Display(Name = "Giá bán")]
