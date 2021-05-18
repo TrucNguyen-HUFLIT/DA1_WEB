@@ -95,12 +95,12 @@
                             <div class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Products" ? "active" : "")"><a href="@Url.Action("Products", "Products")">Trang chủ</a></li>
-                                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Products" ? "active" : "")"><a href="@Url.Action("Products", "Products")">Hãng xe</a></li>
-                                    <li class="nav-item"><a href="#">Tin tức</a></li>
+                                    <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Query_Mau_Hang" ? "active" : "")"><a href="@Url.Action("Query_Mau_Hang", "Products")">Hãng xe</a></li>
+                                    <li class="nav-item"><a href="#blog">Tin tức</a></li>
                                     <!-- <li class="smooth-menu"><a href="#blog">Thông tin khách hàng</a></li> -->
                                     <li class="nav-item"><a href="@Url.Action("Login","Login")">Đăng nhập</a></li>
-                                    <li>
-                                        <button class="book-btn">Đặt lịch</button>
+                                    <li @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")>
+                                        <a href="@Url.Action("Index", "Booking")"><div class="btn-datLich">Đặt lịch</div></a>
                                     </li><!--/.project-btn-->
                                 </ul>
                             </div><!-- /.navbar-collapse -->
@@ -113,8 +113,8 @@
 
     </header><!-- /.top-area-->
     <!-- main-menu End -->
-    
-    
+
+
 
 
     @RenderBody()
