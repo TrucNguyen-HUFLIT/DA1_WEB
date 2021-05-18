@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Web_BanXeMoTo.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Web_BanXeMoTo
 {
@@ -28,6 +25,17 @@ namespace Web_BanXeMoTo
             services.AddControllersWithViews();
             services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMoTo;Trusted_Connection=True;"));
             services.AddMvc();
+            services.AddSession();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(opt =>
+             {
+                 opt.LoginPath = "/";
+                 opt.AccessDeniedPath = "/login/login";
+                 opt.ReturnUrlParameter = "returnUrl";
+                 opt.LogoutPath = "/logout";
+                 opt.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,18 +51,21 @@ namespace Web_BanXeMoTo
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=MauXe}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Products}/{id?}");
             });
         }
     }

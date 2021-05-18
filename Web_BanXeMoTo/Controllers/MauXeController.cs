@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using Web_BanXeMoTo.Models;
 
 namespace Web_BanXeMoTo.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class MauXeController : Controller
     {
         private readonly QLMoToContext database;
@@ -21,6 +23,8 @@ namespace Web_BanXeMoTo.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new ViewModel();
             model.ListHang = database.Hangs.ToArray();
             model.ListMauXe = database.MauXes.ToArray();
@@ -30,6 +34,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new ViewModel();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
@@ -87,6 +93,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Details(string id)
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new ViewModel();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
@@ -96,6 +104,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Delete(string id)
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new ViewModel();
             model.ListHang = database.Hangs.ToArray();
             model.ListKhuyenMai = database.KhuyenMais.ToArray();
@@ -114,6 +124,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Edit(string id)
         {
+            ViewBag.Role = TempData["Role"];
+
             var model = new ViewModel();
             model.ListHang = database.Hangs.ToArray();
             model.ListMauXe = database.MauXes.ToArray();

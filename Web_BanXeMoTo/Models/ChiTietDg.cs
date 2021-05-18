@@ -7,7 +7,7 @@ namespace Web_BanXeMoTo.Models
 {
     public partial class ChiTietDg
     {
-        public string Idkh { get; set; }
+        public int Idkh { get; set; }
         public string Idmau { get; set; }
         public string NoiDungDg { get; set; }
 

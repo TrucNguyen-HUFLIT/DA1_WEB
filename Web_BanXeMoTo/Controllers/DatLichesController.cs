@@ -9,16 +9,20 @@ using Web_BanXeMoTo.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web_BanXeMoTo.Controllers
 {
+    [Authorize(Roles = "admin, staff")]
     public class DatLichesController : Controller
     {
         private readonly QLMoToContext _context;
         [Obsolete]
-        IHostingEnvironment env = null;
+        readonly IHostingEnvironment env;
 
-        public DatLichesController(QLMoToContext context, IHostingEnvironment env = null)
+        public DatLichesController(QLMoToContext context, IHostingEnvironment env)
         {
             _context = context;
             this.env = env;
@@ -28,6 +32,18 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> Index()
         {
             var qLMoToContext = _context.DatLiches.Include(d => d.IdkhNavigation).Include(d => d.IdmauNavigation);
+            return View(await qLMoToContext.ToListAsync());
+        }
+        public async Task<IActionResult> DanhSachHomNay()
+        {
+
+            var qLMoToContext = _context.DatLiches.Where(d => (DateTime)d.NgayDat.Date == DateTime.Now.Date).Where(s => s.XacNhan == true).Include(d => d.IdkhNavigation).Include(d => d.IdmauNavigation);
+            return View(await qLMoToContext.ToListAsync());
+        }
+        public async Task<IActionResult> DanhSachChoXacNhan()
+        {
+
+            var qLMoToContext = _context.DatLiches.Where(s => s.XacNhan == false).Include(d => d.IdkhNavigation).Include(d => d.IdmauNavigation);
             return View(await qLMoToContext.ToListAsync());
         }
 
@@ -166,12 +182,16 @@ namespace Web_BanXeMoTo.Controllers
         }
 
         // gui email khi xac nhan dat lich
-        private void SendEmailConfirm(DatLich datLich)
+        private async Task SendEmailConfirm(DatLich datLich)
         {
-            TaiKhoan user =( from kh in _context.KhachHangs join tk in _context.TaiKhoans
-                            on kh.Idtk equals tk.Idtk
-                            where kh.Idkh == datLich.Idkh
-                            select tk ).FirstOrDefault();
+            //TaiKhoan user = (from kh in _context.KhachHangs
+            //                 join tk in _context.TaiKhoans
+            //                    on kh.Idtk equals tk.Idtk
+            //                 where kh.Idkh == datLich.Idkh
+            //                 select tk).FirstOrDefault();
+            var user = await (from kh in _context.KhachHangs
+                              where kh.Idkh == datLich.Idkh
+                              select new { kh.Email }).FirstOrDefaultAsync();
 
             MimeMessage message = new MimeMessage();
 
@@ -183,10 +203,10 @@ namespace Web_BanXeMoTo.Controllers
             user.Email);
             message.To.Add(to);
 
-            message.Subject = "email Subject";
+            message.Subject = "Xác Nhận !";
             BodyBuilder bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = "<h1>Hello World!</h1>";
-            bodyBuilder.TextBody = "Hello World!";
+            bodyBuilder.HtmlBody = $"<h1>Xác nhận đặt lịch thành công cho đơn đặt {datLich.IddatLich} mặt hàng {datLich.Idmau} </h1>";
+            bodyBuilder.TextBody = "Xác nhận đặt lịch thành công cho đơn hàng " + datLich.IddatLich;
             message.Body = bodyBuilder.ToMessageBody();
             // xac thuc email
             SmtpClient client = new SmtpClient();
@@ -201,6 +221,20 @@ namespace Web_BanXeMoTo.Controllers
         private bool DatLichExists(string id)
         {
             return _context.DatLiches.Any(e => e.IddatLich == id);
+        }
+
+        public IActionResult Csv()
+        {
+            var qLMoToContext = _context.DatLiches.Where(d => (DateTime)d.NgayDat.Date == DateTime.Now.Date).Where(s => s.XacNhan == true).Include(d => d.IdkhNavigation).Include(d => d.IdmauNavigation);
+
+            var builder = new StringBuilder();
+            builder.AppendLine("Id dat lich,Mau,ID Khach Hang");
+            foreach (var lich in qLMoToContext)
+            {
+                builder.AppendLine($"{lich.IddatLich},{lich.Idmau},{lich.Idkh}");
+            }
+
+            return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", $"Danhsach{DateTime.Now.Date}.csv");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,10 @@ using Web_BanXeMoTo.Models;
 
 namespace Web_BanXeMoTo.Controllers
 {
+    [Authorize(Roles = "admin, staff")]
     public class XeController : Controller
     {
-
+        
         QLMoToContext db = new QLMoToContext();
 
         //public  IActionResult Index()
@@ -19,6 +21,7 @@ namespace Web_BanXeMoTo.Controllers
         //}
         public async Task<IActionResult> Index(string sort, string search)
         {
+            ViewBag.Role = TempData["Role"];
             ViewData["Name"] = String.IsNullOrEmpty(sort) ? "name_desc" : "";
             ViewData["ID"] = String.IsNullOrEmpty(sort) ? "ID" : "";
             ViewData["search"] = search;

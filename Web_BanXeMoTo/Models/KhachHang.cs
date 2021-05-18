@@ -17,7 +17,7 @@ namespace Web_BanXeMoTo.Models
             HoaDons = new HashSet<HoaDon>();
         }
         [Display(Name = "ID")]
-        public string Idkh { get; set; }
+        public int Idkh { get; set; }
         [Display(Name = "Loại Tài Khoản")]
         public string Idtype { get; set; }
         [Display(Name = "Email")]
@@ -36,7 +36,5 @@ namespace Web_BanXeMoTo.Models
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [NotMapped]
         public IFormFile Image { get; set; }
-        [NotMapped]
-        public IEnumerable<LoaiKh> ListLoaiKh { get; set; }
     }
 }

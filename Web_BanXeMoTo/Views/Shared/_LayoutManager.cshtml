@@ -15,6 +15,7 @@
     <link href="~/css/style.css" rel="stylesheet">
 </head>
 <body>
+    @*<input type="text" id="CheckRole" hidden value="@ViewBag.Role" />*@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
@@ -108,7 +109,6 @@
                             </li>
                             <li class="app-sidebar__heading">Quản lý</li>
                             <li>
-
                                 @Html.ActionLink("Quản lý Mẫu xe", "Index", "MauXe")
                             </li>
                             <li>
@@ -140,7 +140,10 @@
                                 Thống kê
                                 <p class="btn-active">@Html.ActionLink("Thống kê doanh số", "MauXe")</p>
                             </li>
-
+                            <br/><br /><br />
+                            <li>
+                                @Html.ActionLink("Đăng xuất", "Logout", "Login")
+                            </li>
                         </ul>
                     </div>
                 </div>

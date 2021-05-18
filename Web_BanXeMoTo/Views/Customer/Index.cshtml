@@ -26,9 +26,9 @@
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["IDTK"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">ID TAI KHOAN </a>
                 </th>
-                <th>
+                @*<th>
                     Loai Khach Hang
-                </th>
+                </th>*@
                 <th>
                     <a asp-action="Index" asp-route-sortOrder="@ViewData["Name"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
                 </th>
@@ -52,11 +52,11 @@
                         @Html.DisplayFor(modelItem => item.Idkh)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Idtk)
+                        @Html.DisplayFor(modelItem => item.Email)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.IdloaiKhNavigation.TenLoaiKh)
-                    </td>
+                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.TenKh)
                     </td>

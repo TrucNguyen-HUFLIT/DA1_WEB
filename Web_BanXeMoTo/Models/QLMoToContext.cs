@@ -50,10 +50,7 @@ namespace Web_BanXeMoTo.Models
 
                 entity.ToTable("ChiTietDG");
 
-                entity.Property(e => e.Idkh)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDKH");
+                entity.Property(e => e.Idkh).HasColumnName("IDKH");
 
                 entity.Property(e => e.Idmau)
                     .HasMaxLength(50)
@@ -119,11 +116,7 @@ namespace Web_BanXeMoTo.Models
                     .IsUnicode(false)
                     .HasColumnName("IDDatLich");
 
-                entity.Property(e => e.Idkh)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDKH");
+                entity.Property(e => e.Idkh).HasColumnName("IDKH");
 
                 entity.Property(e => e.Idmau)
                     .IsRequired()
@@ -173,11 +166,7 @@ namespace Web_BanXeMoTo.Models
                     .IsUnicode(false)
                     .HasColumnName("IDHD");
 
-                entity.Property(e => e.Idkh)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("IDKH");
+                entity.Property(e => e.Idkh).HasColumnName("IDKH");
 
                 entity.Property(e => e.NgayDat).HasColumnType("date");
 
@@ -195,8 +184,7 @@ namespace Web_BanXeMoTo.Models
                 entity.ToTable("KhachHang");
 
                 entity.Property(e => e.Idkh)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
+                    .ValueGeneratedNever()
                     .HasColumnName("IDKH");
 
                 entity.Property(e => e.Avatar).IsUnicode(false);
@@ -305,8 +293,7 @@ namespace Web_BanXeMoTo.Models
                 entity.ToTable("NhanVien");
 
                 entity.Property(e => e.Idnv)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
+                    .ValueGeneratedNever()
                     .HasColumnName("IDNV");
 
                 entity.Property(e => e.Avatar).IsUnicode(false);

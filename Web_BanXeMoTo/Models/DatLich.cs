@@ -13,7 +13,7 @@ namespace Web_BanXeMoTo.Models
         [Display(Name = "ID Mẫu Xe")]
         public string Idmau { get; set; }
         [Display(Name = "ID Khách hàng")]
-        public string Idkh { get; set; }
+        public int Idkh { get; set; }
         [Display(Name = "Thời gian")]
         public DateTime NgayDat { get; set; }
         [Display(Name = "Trạng thái xác nhận")]
