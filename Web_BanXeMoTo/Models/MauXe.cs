@@ -52,6 +52,7 @@ namespace Web_BanXeMoTo.Models
         [Required(ErrorMessage = "Không được bỏ trống")]
         public string MoTa { get; set; }
 
+        //true là đang kinh doanh, false là ngừng kinh doanh
         [Display(Name = "Trạng thái")]
         public bool? TrangThai { get; set; }
 

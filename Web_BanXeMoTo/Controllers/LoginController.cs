@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -30,32 +29,30 @@ namespace Web_BanXeMoTo.Controllers
         public async Task<IActionResult> Login(LoginMODEL loginModel)
         {
             var model = new LoginViewModel();
-            var accountNV = database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
-            var accountKH = database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
-            if (accountNV != null)
+            var modelNV = database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
+            var modelKH = database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
+            if (modelNV != null)
             {
-                string accountRole = database.TypeAccs.Where(x => x.Idtype == accountNV.Idtype).Select(x => x.Name).FirstOrDefault();
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, loginModel.Email),
-                    new Claim(ClaimTypes.Role, accountRole),
+                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==modelNV.Idtype).FirstOrDefault().Name),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
-                TempData["Role"] = accountRole;
 
                 HttpContext.Session.SetString("email", loginModel.Email);
-                return RedirectToAction("Index", "Customer");
+                return RedirectToAction("ProfileNhanVien", "Profile");
             }
-            else if (accountKH != null)
+            else if (modelKH != null)
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, loginModel.Email),
-                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==accountKH.Idtype).FirstOrDefault().Name),
+                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==modelKH.Idtype).FirstOrDefault().Name),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -66,17 +63,21 @@ namespace Web_BanXeMoTo.Controllers
                 HttpContext.Session.SetString("email", loginModel.Email);
                 return RedirectToAction("Products", "Products");
             }
-            else
-            {
-                ViewBag.error = "Invalid Account";
-                return View("Login");
-            }
+
+            ViewBag.error = "Invalid Account";
+            return View("Login");
+
 
         }
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
+            StaticAcc.Avatar = "";
+            StaticAcc.Name = "";
+            StaticAcc.TypeAcc = "";
+            StaticAcc.IdRole = "";
+            HttpContext.Session.Remove("email");
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }

@@ -112,8 +112,7 @@ namespace Web_BanXeMoTo.Models
                 entity.ToTable("DatLich");
 
                 entity.Property(e => e.IddatLich)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
+                    .ValueGeneratedNever()
                     .HasColumnName("IDDatLich");
 
                 entity.Property(e => e.Idkh).HasColumnName("IDKH");
@@ -124,7 +123,7 @@ namespace Web_BanXeMoTo.Models
                     .IsUnicode(false)
                     .HasColumnName("IDMau");
 
-                entity.Property(e => e.NgayDat).HasColumnType("date");
+                entity.Property(e => e.NgayDat).HasColumnType("datetime");
 
                 entity.HasOne(d => d.IdkhNavigation)
                     .WithMany(p => p.DatLiches)

@@ -165,14 +165,14 @@ namespace Web_BanXeMoTo.Controllers
         {
             string uniqueFileName = null;
 
-            if (kh.Image != null)
+            if (kh.UploadHinh != null)
             {
                 string uploadsFolder = Path.Combine(_webHostEnviroment.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + kh.Image.FileName;
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + kh.UploadHinh.FileName;
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    kh.Image.CopyTo(fileStream);
+                    kh.UploadHinh.CopyTo(fileStream);
                 }
             }
             return uniqueFileName;

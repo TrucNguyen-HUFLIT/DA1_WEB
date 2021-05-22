@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Web_BanXeMoTo.Controllers
 {
-    [Authorize(Roles = "admin, staff")]
+    [Authorize(Roles = "staff")]
     public class DatLichesController : Controller
     {
         private readonly QLMoToContext _context;
@@ -48,7 +48,7 @@ namespace Web_BanXeMoTo.Controllers
         }
 
         // GET: DatLiches/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -94,7 +94,7 @@ namespace Web_BanXeMoTo.Controllers
         }
 
         // GET: DatLiches/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
@@ -116,7 +116,7 @@ namespace Web_BanXeMoTo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("IddatLich,Idmau,Idkh,NgayDat,XacNhan")] DatLich datLich)
+        public async Task<IActionResult> Edit(int id, [Bind("IddatLich,Idmau,Idkh,NgayDat,XacNhan")] DatLich datLich)
         {
             if (id != datLich.IddatLich)
             {
@@ -151,7 +151,7 @@ namespace Web_BanXeMoTo.Controllers
         }
 
         // GET: DatLiches/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -173,7 +173,7 @@ namespace Web_BanXeMoTo.Controllers
         // POST: DatLiches/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var datLich = await _context.DatLiches.FindAsync(id);
             _context.DatLiches.Remove(datLich);
@@ -218,7 +218,7 @@ namespace Web_BanXeMoTo.Controllers
             client.Disconnect(true);
             client.Dispose();
         }
-        private bool DatLichExists(string id)
+        private bool DatLichExists(int id)
         {
             return _context.DatLiches.Any(e => e.IddatLich == id);
         }

@@ -23,7 +23,7 @@ namespace Web_BanXeMoTo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=DESKTOP-18VI6MD;Database=QLMoTo;Trusted_Connection=True;"));
+            services.AddDbContext<QLMoToContext>(options => options.UseSqlServer("Server=DESKTOP-I7EOLFR\\SQLEXPRESS;Database=QLMoTo;Trusted_Connection=True;"));
             services.AddMvc();
             services.AddSession();
 
@@ -65,7 +65,7 @@ namespace Web_BanXeMoTo
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Products}/{action=Products}/{id?}");
+                    pattern: "{controller=Products}/{action=Products}");
             });
         }
     }

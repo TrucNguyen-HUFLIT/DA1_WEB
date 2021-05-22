@@ -11,7 +11,7 @@ using Web_BanXeMoTo.Models;
 
 namespace Web_BanXeMoTo.Controllers
 {
-    [Authorize(Roles ="admin")]
+    [Authorize(Roles = "admin")]
     public class NhanVienController : Controller
     {
         private readonly QLMoToContext database;
@@ -22,9 +22,22 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
+        public IActionResult IndexProfile()
+        {
+
+            return View();
+
+
+
+
+        }
+        //[HttpPost]
+        //public IActionResult IndexProfile()
+        //{
+
+        //}
         public IActionResult Index()
         {
-            ViewBag.Role = TempData["Role"];
 
             string email = User.FindFirst(ClaimTypes.Email).Value;
             var model = new ViewModelNV
@@ -39,8 +52,6 @@ namespace Web_BanXeMoTo.Controllers
 
         public IActionResult Detail(int id)
         {
-            ViewBag.Role = TempData["Role"];
-
             var model = new ViewModelNV
             {
                 nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault(),
@@ -51,8 +62,6 @@ namespace Web_BanXeMoTo.Controllers
         }
         public IActionResult Create()
         {
-            ViewBag.Role = TempData["Role"];
-
             var model = new ViewModelNV
             {
                 nhanVien = new NhanVien(),
@@ -73,13 +82,13 @@ namespace Web_BanXeMoTo.Controllers
             if (ModelState.IsValid)
             {
                 string wwwRootPath = hostEnvironment.WebRootPath;
-                string fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
-                string extension1 = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
+                string fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UploadHinh.FileName);
+                string extension1 = Path.GetExtension(nhanVien.UploadHinh.FileName);
                 nhanVien.Avatar = fileName1 += extension1;
                 string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                 using (var fileStream = new FileStream(path1, FileMode.Create))
                 {
-                    await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
+                    await nhanVien.UploadHinh.CopyToAsync(fileStream);
                 }
 
             }
@@ -90,8 +99,6 @@ namespace Web_BanXeMoTo.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewBag.Role = TempData["Role"];
-
             var model = new ViewModelNV();
             model.nhanVien = database.NhanViens.Where(x => x.Idnv == id).FirstOrDefault();
             model.ListType = database.TypeAccs.ToArray();
@@ -118,15 +125,15 @@ namespace Web_BanXeMoTo.Controllers
                 string wwwRootPath = hostEnvironment.WebRootPath;
                 string fileName1;
                 string extension1;
-                if (nhanVien.UpLoadAvt != null)
+                if (nhanVien.UploadHinh != null)
                 {
-                    fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UpLoadAvt.FileName);
-                    extension1 = Path.GetExtension(nhanVien.UpLoadAvt.FileName);
+                    fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UploadHinh.FileName);
+                    extension1 = Path.GetExtension(nhanVien.UploadHinh.FileName);
                     model.nhanVien.Avatar = fileName1 += extension1;
                     string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                     using (var fileStream = new FileStream(path1, FileMode.Create))
                     {
-                        await nhanVien.UpLoadAvt.CopyToAsync(fileStream);
+                        await nhanVien.UploadHinh.CopyToAsync(fileStream);
                     }
                 }
                 database.Update(model.nhanVien);
@@ -140,6 +147,7 @@ namespace Web_BanXeMoTo.Controllers
 
     public class ViewModelNV
     {
+
         public NhanVien nhanVien { get; set; }
 
         public NhanVien[] ListNhanVien { get; set; }
