@@ -87,7 +87,7 @@
                             </select>
                         </div>
                         @*<input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />*@
-                        <input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
+                        <input asp-for="nhanVien.UploadHinh" accept="image/*" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" />
                         <div class="form-group">
                             <input type="submit" value="Thêm" class="btn btn-primary" />
                         </div>

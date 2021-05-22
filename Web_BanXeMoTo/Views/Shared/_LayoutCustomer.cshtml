@@ -1,10 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-
+﻿@using Microsoft.AspNetCore.Http;
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -20,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
 
     <!-- TITLE OF SITE -->
-    <title>Moto Circle Home Page</title>
+    <title>@ViewData["Title"]</title>
 
     <!-- favicon img -->
     <link rel="shortcut icon" type="image/icon" href="~/assets/logo/favicon.png" />
@@ -51,8 +45,8 @@
     <link rel="stylesheet" href="~/assets/css/bootsnav.css" />
 
     <!--style.css-->
-    <link href="~/assets/css/style.css" rel="stylesheet" />
     <link href="~/assets/css/MyStyle.css" rel="stylesheet" />
+    <link href="~/assets/css/style.css" rel="stylesheet" />
 
     <!--responsive.css-->
     <link rel="stylesheet" href="~/assets/css/responsive.css" />
@@ -96,12 +90,42 @@
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Products" ? "active" : "")"><a href="@Url.Action("Products", "Products")">Trang chủ</a></li>
                                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Query_Mau_Hang" ? "active" : "")"><a href="@Url.Action("Query_Mau_Hang", "Products")">Hãng xe</a></li>
-                                    <li class="nav-item"><a href="#blog">Tin tức</a></li>
+
                                     <!-- <li class="smooth-menu"><a href="#blog">Thông tin khách hàng</a></li> -->
-                                    <li class="nav-item"><a href="@Url.Action("Login","Login")">Đăng nhập</a></li>
-                                    <li @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")>
-                                        <a href="@Url.Action("Index", "Booking")"><div class="btn-datLich">Đặt lịch</div></a>
-                                    </li><!--/.project-btn-->
+                                    <li>
+                                        <button class="book-btn">Đặt lịch</button>
+                                    </li>
+                                    @if (Web_BanXeMoTo.Models.StaticAcc.Name == "")
+                                    {
+                                        <li>
+                                            @Html.ActionLink("Đăng nhập ", "Login", "Login")
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        @*<a href="@Html.ActionLink("", "IndexProfile", "ProfileKhachHang")">*@
+
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0);" style="padding: 0" class=" dropdown-toggle" data-toggle="dropdown">
+                                                <div>
+                                                    <img src="/img/@Web_BanXeMoTo.Models.StaticAcc.Avatar" class="img_avt_customer" height="40" width="40" />
+
+                                                </div>
+                                                @Web_BanXeMoTo.Models.StaticAcc.Name
+                                            </a>
+                                            <ul class="dropdown-menu ">
+                                                <li >
+                                                    @Html.ActionLink("Trang cá nhân", "ProfileKhachHang", "Profile", "", new {@class = "a_DropdownMenu" })
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Đăng xuất", "Logout", "Login", "", new { @class = "a_DropdownMenu" })
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                    }
+
+                                    <!--/.project-btn-->
                                 </ul>
                             </div><!-- /.navbar-collapse -->
                         </div><!-- /.main-menu-->

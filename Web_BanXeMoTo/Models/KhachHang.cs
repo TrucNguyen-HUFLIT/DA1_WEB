@@ -16,17 +16,23 @@ namespace Web_BanXeMoTo.Models
             DatLiches = new HashSet<DatLich>();
             HoaDons = new HashSet<HoaDon>();
         }
-        [Display(Name = "ID")]
+        [Display(Name = "ID khách hàng")]
         public int Idkh { get; set; }
-        [Display(Name = "Loại Tài Khoản")]
+        [Display(Name = "Loại tài khoản")]
         public string Idtype { get; set; }
         [Display(Name = "Email")]
         public string Email { get; set; }
         [Display(Name = "Password")]
+        [Required(ErrorMessage = "Không được bỏ trống!")]
         public string Pass { get; set; }
-        [Display(Name = "Tên Khách Hàng")]
+        [Display(Name = "Tên khách hàng")]
+        [Required(ErrorMessage ="Không được bỏ trống!")]
         public string TenKh { get; set; }
+        [Display(Name = "Địa chỉ")]
+        [Required(ErrorMessage = "Không được bỏ trống!")]
         public string DiaChi { get; set; }
+        [Display(Name = "Số điện thoại")]
+        [Required(ErrorMessage = "Không được bỏ trống!")]
         public string DienThoai { get; set; }
         public string Avatar { get; set; }
 
@@ -35,6 +41,6 @@ namespace Web_BanXeMoTo.Models
         public virtual ICollection<DatLich> DatLiches { get; set; }
         public virtual ICollection<HoaDon> HoaDons { get; set; }
         [NotMapped]
-        public IFormFile Image { get; set; }
+        public IFormFile UploadHinh { get; set; }
     }
 }

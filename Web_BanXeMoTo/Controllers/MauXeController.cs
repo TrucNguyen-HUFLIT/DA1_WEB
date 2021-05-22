@@ -149,6 +149,7 @@ namespace Web_BanXeMoTo.Controllers
                 model.mauXe.BaoHanh = mauXe.BaoHanh;
                 model.mauXe.GiaBan = mauXe.GiaBan;
                 model.mauXe.MoTa = mauXe.MoTa;
+                model.mauXe.TrangThai = mauXe.TrangThai;
 
                 #region Save Image from wwwroot/img
                 string wwwRootPath = hostEnvironment.WebRootPath;
@@ -210,6 +211,7 @@ namespace Web_BanXeMoTo.Controllers
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
         public KhuyenMai[] ListKhuyenMai { get; set; }
+
     }
 
 }
