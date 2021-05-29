@@ -26,9 +26,8 @@ namespace Web_BanXeMoTo.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginMODEL loginModel)
+        public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var model = new LoginViewModel();
             var modelNV = database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
             var modelKH = database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
             if (modelNV != null)
@@ -64,28 +63,62 @@ namespace Web_BanXeMoTo.Controllers
                 return RedirectToAction("Products", "Products");
             }
 
-            ViewBag.error = "Invalid Account";
+            ViewBag.error = "Sai thông tin tài khoản";
             return View("Login");
-
-
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterModel registerModels)
+        {
+            if (ModelState.IsValid)
+            {
+                var emailExisted = database.KhachHangs.Any(x => x.Email == registerModels.Email);
+                if(emailExisted)
+                {
+                    ViewBag.error = "Email đã tồn tại";
+                    return View(registerModels);
+                }
+                var model = new KhachHang
+                {
+                    Idkh = database.KhachHangs.ToArray()[^1].Idkh + 1,
+                    TenKh = registerModels.Email,
+                    Email = registerModels.Email,
+                    Pass = registerModels.Password,
+                    DiaChi = "",
+                    DienThoai = "",
+                    Avatar = "icon.png",
+                    Idtype = "type03",
+                };
+
+                database.KhachHangs.Add(model);
+                await database.SaveChangesAsync();
+                return View("Login");
+            }
+            return View(registerModels);
+        }
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             StaticAcc.Avatar = "";
             StaticAcc.Name = "";
-            StaticAcc.TypeAcc = "";
             StaticAcc.IdRole = "";
             HttpContext.Session.Remove("email");
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login");
+            if (StaticAcc.TypeAcc == "customer")
+            {
+                StaticAcc.TypeAcc = "";
+                return RedirectToAction("Products", "Products");
+            }
+            else
+            {
+                StaticAcc.TypeAcc = "";
+                return RedirectToAction("Login");
+            }
         }
-    }
-    public class LoginViewModel
-    {
-        public NhanVien nhanviens;
-        public LoginMODEL loginModel;
-        public NhanVien[] listNhanVien;
     }
 }

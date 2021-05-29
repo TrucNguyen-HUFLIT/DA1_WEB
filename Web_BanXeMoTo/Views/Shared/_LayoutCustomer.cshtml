@@ -92,8 +92,8 @@
                                     <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Query_Mau_Hang" ? "active" : "")"><a href="@Url.Action("Query_Mau_Hang", "Products")">Hãng xe</a></li>
 
                                     <!-- <li class="smooth-menu"><a href="#blog">Thông tin khách hàng</a></li> -->
-                                    <li>
-                                        <button class="book-btn">Đặt lịch</button>
+                                    <li @(ViewContext.RouteData.Values["Action"].ToString() == "Create" ? "active" : "")>
+                                        <a href="@Url.Action("Create", "Booking")" ><div class="btn-datLich">Đặt lịch</div></a>
                                     </li>
                                     @if (Web_BanXeMoTo.Models.StaticAcc.Name == "")
                                     {

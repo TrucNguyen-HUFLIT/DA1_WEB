@@ -16,7 +16,7 @@
             <input type="hidden" asp-for="IddatLich" />
             <div class="form-group">
                 <label asp-for="Idmau" class="control-label"></label>
-                <select asp-for="Idmau" class="form-control" asp-items="ViewBag.Idmau"  readonly></select>
+                <select asp-for="Idmau" class="form-control" asp-items="ViewBag.Idmau" readonly></select>
                 <span asp-validation-for="Idmau" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -26,8 +26,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="NgayDat" class="control-label"></label>
-                <input asp-for="NgayDat" class="form-control"  readonly/>
+                <input asp-for="NgayDat" class="form-control" readonly />
                 <span asp-validation-for="NgayDat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GhiChu" class="control-label"></label>
+                <input asp-for="GhiChu" class="form-control" readonly />                
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

@@ -111,8 +111,13 @@ namespace Web_BanXeMoTo.Models
 
                 entity.ToTable("DatLich");
 
+                //entity.Property(e => e.IddatLich)
+                //    .ValueGeneratedNever()
+                //    .HasColumnName("IDDatLich");
+
                 entity.Property(e => e.IddatLich)
-                    .ValueGeneratedNever()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
                     .HasColumnName("IDDatLich");
 
                 entity.Property(e => e.Idkh).HasColumnName("IDKH");

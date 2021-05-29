@@ -8,8 +8,9 @@ namespace Web_BanXeMoTo.Models
 {
     public partial class ChiTietHd
     {
-        [Display(Name = "ID khách hàng")]
+        [Display(Name = "ID hóa đơn")]
         public string Idhd { get; set; }
+        [Display(Name = "ID xe")]
         public string Idxe { get; set; }
 
         [Display(Name = "Khuyến mãi")] 

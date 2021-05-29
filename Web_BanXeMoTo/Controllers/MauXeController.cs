@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,15 +22,77 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
-        public IActionResult Index()
-        {
-            ViewBag.Role = TempData["Role"];
+        //public IActionResult Index()
+        //{
+        //    ViewBag.Role = TempData["Role"];
 
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListMauXe = database.MauXes.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            return View(model);
+        //    var model = new ViewModel();
+        //    model.ListHang = database.Hangs.ToArray();
+        //    model.ListMauXe = database.MauXes.ToList();
+        //    model.ListKhuyenMai = database.KhuyenMais.ToArray();
+        //    return View(model);
+        //}
+
+        public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            //A ViewBag property provides the view with the current sort order, because this must be included in 
+            //  the paging links in order to keep the sort order the same while paging
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+
+            var ModelList = new List<MauXe>();
+
+            //ViewBag.CurrentFilter, provides the view with the current filter string.
+            //he search string is changed when a value is entered in the text box and the submit button is pressed. In that case, the searchString parameter is not null.
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+            using (var context = new QLMoToContext())
+            {
+                var model = from s in context.MauXes
+                            select s;
+                //Search and match data, if search string is not null or empty
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    model = model.Where(s => s.Idmau.Contains(searchString)
+                                           || s.Idhang.Contains(searchString)
+                                           || s.TenXe.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        ModelList = model.OrderByDescending(s => s.TenXe).ToList();
+                        break;
+
+                    default:
+                        ModelList = model.OrderBy(s => s.TenXe).ToList();
+                        break;
+                }
+
+            }
+            //indicates the size of list
+            int pageSize = 10;
+            //set page to one is there is no value, ??  is called the null-coalescing operator.
+            int pageNumber = (page ?? 1);
+            //return the Model data with paged
+            var modelv = new ViewModel
+            {
+                ListHang = database.Hangs.ToArray(),
+                ListXe = database.Xes.ToArray(),
+                ListMauXes = ModelList.ToPagedList(pageNumber, pageSize),
+                ListKhuyenMai = database.KhuyenMais.ToArray()
+            };
+            return View(modelv);
         }
 
         public IActionResult Create()
@@ -204,6 +267,8 @@ namespace Web_BanXeMoTo.Controllers
     public class ViewModel
     {
         //Create Model to use Multiple Model in View
+        public Xe[] ListXe { get; set; }
+
         public Hang hang { get; set; }
         public KhuyenMai khuyenMai { get; set; }
         public MauXe mauXe { get; set; }
@@ -211,7 +276,13 @@ namespace Web_BanXeMoTo.Controllers
         public MauXe[] ListMauXe { get; set; }
         public Hang[] ListHang { get; set; }
         public KhuyenMai[] ListKhuyenMai { get; set; }
+        public DatLich[] ListDatLich { get; set; }
+        public KhachHang khachHang { get; set; }
+        public KhachHang[] ListKhachHang { get; set; }
+        public ChiTietDg chiTietDg { get; set; }
+        public ChiTietDg[] ListChiTietDg { get; set; }
 
+        public IPagedList<MauXe> ListMauXes { get; set; }
     }
 
 }

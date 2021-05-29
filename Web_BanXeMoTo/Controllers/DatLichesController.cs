@@ -184,11 +184,6 @@ namespace Web_BanXeMoTo.Controllers
         // gui email khi xac nhan dat lich
         private async Task SendEmailConfirm(DatLich datLich)
         {
-            //TaiKhoan user = (from kh in _context.KhachHangs
-            //                 join tk in _context.TaiKhoans
-            //                    on kh.Idtk equals tk.Idtk
-            //                 where kh.Idkh == datLich.Idkh
-            //                 select tk).FirstOrDefault();
             var user = await (from kh in _context.KhachHangs
                               where kh.Idkh == datLich.Idkh
                               select new { kh.Email }).FirstOrDefaultAsync();
