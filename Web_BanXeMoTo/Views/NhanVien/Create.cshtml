@@ -82,8 +82,7 @@
                             <select asp-for="nhanVien.Idtype" class="form-control">
                                 @foreach (var item in Model.ListType)
                                 {
-                                    <option value="@item.Idtype">@item.Name </option>
-                                }
+                    <option value="@item.Idtype">@item.Name </option>}
                             </select>
                         </div>
                         @*<input asp-for="nhanVien.UpLoadAvt" accept="image/*" onchange="ChangeImage(this,'#previewImg')" />*@

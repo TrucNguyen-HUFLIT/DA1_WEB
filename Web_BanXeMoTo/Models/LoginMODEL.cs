@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Web_BanXeMoTo.Models
 {
-    public class LoginMODEL
+    public class LoginModel
     {
         [DataType(DataType.EmailAddress)]
-        [Required(ErrorMessage = "Email not empty")]
+        [Required(ErrorMessage = "Không được để trống!")]
         public string Email { get; set; }
 
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Password not empty ")]
+        [Required(ErrorMessage = "Không được để trống!")]
 
         public string Password { get; set; }
     }

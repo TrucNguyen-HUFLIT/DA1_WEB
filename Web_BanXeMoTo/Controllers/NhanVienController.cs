@@ -22,20 +22,6 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
-        public IActionResult IndexProfile()
-        {
-
-            return View();
-
-
-
-
-        }
-        //[HttpPost]
-        //public IActionResult IndexProfile()
-        //{
-
-        //}
         public IActionResult Index()
         {
 
@@ -78,7 +64,7 @@ namespace Web_BanXeMoTo.Controllers
 
             var model = new ViewModelNV();
             model.ListType = database.TypeAccs.ToArray();
-
+            model.nhanVien = nhanVien;
             if (ModelState.IsValid)
             {
                 string wwwRootPath = hostEnvironment.WebRootPath;
@@ -90,11 +76,13 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     await nhanVien.UploadHinh.CopyToAsync(fileStream);
                 }
-
+                nhanVien.Idrole = "role02";
+                nhanVien.Idnv = database.NhanViens.ToArray()[^1].Idnv + 1;
+                database.NhanViens.Add(nhanVien);
+                await database.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            database.Add(nhanVien);
-            await this.database.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return View(model);
 
         }
         public IActionResult Edit(int id)

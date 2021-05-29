@@ -2,8 +2,8 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{ ViewData["Title"] = "Index";
-                Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+@{ ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
 
 <!--about-us start -->
 <section id="home" class="about-us">
@@ -40,32 +40,31 @@
                     Tổng hợp các hãng xe
                 </h2>
             </div><!--/.gallery-header-->
-            <div class="about-btn">
-                <a href="@Url.Action("Query_Gia", "Products", null, null,null,"searchPriceTools")"><button class="about-view packages-btn">Tìm theo giá</button></a>
-            </div><!--/.about-btn-->
+            
             <div class="gallery-box">
                 <div class="gallery-content">
                     <div class="filtr-container">
                         <div class="row">
                             @foreach (var hang in Model.ListHang)
                             {
-                @foreach (var mau in Model.ListMauXe)
-                {
-                    if (mau.Idhang == hang.Idhang)
-                    {
-        <div class="col-md-4">
-            <div class="filtr-item">
-                <img src="@("/img/" + mau.HinhAnh1)" alt="package-place" />
-                <div class="item-title">
-                    <a asp-action="Query_Hang" asp-route-id="@mau.Idhang">
-                        <h3>@Html.DisplayFor(model => hang.TenHang)<br /> @Html.DisplayFor(model => mau.TenXe)</h3>
-                        <p>250 chiếc đã bán</p>
-                    </a>
-                </div><!-- /.item-title -->
-            </div><!-- /.filtr-item -->
-        </div> <!-- /.col -->break;
-    }
-}}
+                                @foreach (var mau in Model.ListMauXe)
+                                {
+                                    if (mau.Idhang == hang.Idhang)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="filtr-item">
+                                                <img src="@("/img/" + mau.HinhAnh1)" alt="package-place" />
+                                                <div class="item-title">
+                                                    <a asp-action="Query_Hang" asp-route-id="@mau.Idhang">
+                                                        <h3>@Html.DisplayFor(model => hang.TenHang)<br /></h3>
+                                                    </a>
+                                                </div><!-- /.item-title -->
+                                            </div><!-- /.filtr-item -->
+                                        </div> <!-- /.col -->
+                                        break;
+                                    }
+                                }
+                            }
                             <div class="col-md-8">
                                 <div class="filtr-item">
                                     <img src="~/img/Background/ProductDetailBG02.png" />
@@ -127,41 +126,59 @@
                         </tr>
                         <tr>
                             <td>*@
-                @foreach (var mau in Model.ListMauXe)
-                {
-    <div class="col-md-4 col-sm-6">
-        <div class="single-package-item">
-            <i><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau"><img src="@("/img/" + mau.HinhAnh1)" alt="package-place" /></a></i>
-            <div class="single-package-item-txt">
-                <h3>@Html.DisplayFor(model => mau.TenXe)<br /><span class="pull-right">@string.Format("{0:N0}", ((int)mau.GiaBan)) VNĐ</span></h3>
-                <div class="packages-para">
-                    <p>
-                        <span>
-                            <i class="fa fa-angle-right"><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau">Thông số sản phẩm</a></i>
-                        </span>
-                    </p>
-                </div><!--/.packages-para-->
-                <div class="packages-review">
-                    <p>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <span>254 reviews</span>
-                    </p>
-                </div><!--/.packages-review-->
-                <div class="about-btn">
-                    <button class="about-view packages-btn">
-                        book now
-                    </button>
-                </div><!--/.about-btn-->
-            </div><!--/.single-package-item-txt-->
-        </div><!--/.single-package-item-->
-    </div><!--/.col-->}
+                        @foreach (var hang in Model.ListHang)
+                            {
+                                @foreach (var mau in Model.ListMauXe)
+                                {
+                                    if (mau.Idhang == hang.Idhang)
+                                    {
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="single-package-item">
+                                                <i><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau"><img src="@("/img/" + mau.HinhAnh1)" alt="package-place" /></a></i>
+                                                <div class="single-package-item-txt">
+                                                    <h3>@Html.DisplayFor(model => mau.TenXe)<br /><span class="pull-right">@string.Format("{0:N0}", ((int)mau.GiaBan)) VNĐ</span></h3>
+                                                    <div class="packages-para">
+                                                        <p>
+                                                            <span>
+                                                                <i class="fa fa-angle-right"><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau">Thông số sản phẩm</a></i>
+                                                            </span>
+                                                        </p>
+                                                    </div><!--/.packages-para-->
+                                                    <div class="packages-review">
+                                                        <p>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <span>254 reviews</span>
+                                                        </p>
+                                                    </div><!--/.packages-review-->
+                                                    <div class="about-btn">
+                                                        <a href="@Url.Action("Create", "Booking")">
+                                                            <button class="about-view packages-btn">
+                                                                book now
+                                                            </button>
+                                                        </a>
+                                                    </div><!--/.about-btn-->
+                                                </div><!--/.single-package-item-txt-->
+                                            </div><!--/.single-package-item-->
+                                        </div><!--/.col-->
+                                        break;
+                                    }
+                                }
+                            }
+            <div class="col-md-4 col-sm-6">
+                <div class="single-package-item" style="padding-bottom:0; overflow:hidden">
+                    <a class="fullBtn" href="@Url.Action("Query_Gia", "Products", null, null,null,"searchPriceTools")">Xem tất cả sản phẩm</a>
+                    <div class="fullBtn__overlay"></div>
+                </div>
+            </div>
+
+
                 @*</td>
-                        </tr>
-                    }*@
+            </tr>
+        }*@
 
 
             </div><!--/.row-->
@@ -175,7 +192,7 @@
     <div class="container">
         <div class="special-offer-content">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <div class="single-special-offer">
                         <div class="single-special-offer-txt">
                             <h2 class="text-danger">Ninja H2</h2>
@@ -199,7 +216,7 @@
                         </div><!--/.single-special-offer-txt-->
                     </div><!--/.single-special-offer-->
                 </div><!--/.col-->
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="single-special-offer">
                         <div class="single-special-offer-bg">
                             <img src="~/assets/images/offer/offer-shape.png" alt="offer-shape">

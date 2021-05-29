@@ -17,3 +17,8 @@ function ChangeImage(UploadHinh1, previewImg) {
         reader.readAsDataURL(UploadHinh1.files[0]);
     }
 }
+
+//function getVal() {
+//    document.getElementById("ChiTietHd.KhuyenMai").value = document.getElementById("KhuyenMai").value
+//    document.getElementById("ChiTietHd.GiaBan").value = document.getElementById("GiaBan").value
+//}

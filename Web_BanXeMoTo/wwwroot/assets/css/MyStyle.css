@@ -27,6 +27,15 @@
     width: 100%;
 }
 
+.filtr-item .item-title{
+    text-align:center;
+    line-height:150px;
+}
+
+.filtr-item h3{
+    font-size: 65px;
+}
+
 .btn-datLich {
     position: relative;
     background-color: #00d8ff;
@@ -148,6 +157,35 @@
 
 .main-menu .nav {
     margin-right: 50px;
+}
+
+.fullBtn {
+    width: 100%;
+    height: 100%;
+    color: #00d8ff;
+    text-align: center;
+    font-size: 30px;
+    line-height: 440px;
+    z-index: 10;
+    transition: 0.5s all;
+}
+.fullBtn__overlay{
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    left: -1100px;
+    width: 800px;
+    height: 100%;
+    background-color: #00d8ff;
+    transform: skewX(40deg);
+    transition: 0.5s all;
+}
+.fullBtn:hover {
+    color: #fff;
+    font-size: 30px;
+}
+.fullBtn:hover + .fullBtn__overlay{
+    left: -230px;
 }
 /**
     ====================================================
@@ -318,10 +356,57 @@
 /************************** SEARCH PRICE **************************/
 
 #searchPriceTools {
-    padding: 100px 0;
+    padding: 60px 0;
     text-align: center;
+    font-size: 24px;
 }
 
-    #searchPriceTools text {
-        padding-left: 30px;
-    }
+#searchPriceTools text {
+    padding-left: 30px;
+}
+
+#searchPriceTools .btn{
+    font-size: 18px;
+}
+
+/************************** Đánh giá ******************************/
+
+.danhGia {
+    width: 90%;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffd7d4;
+    border-radius: 10px;
+}
+
+.danhGia h3{
+    padding: 10px 0 30px 0;
+}
+
+.danhGia .danhGia__content{
+    border: 3px solid #a94442;
+    padding: 10px 0;
+    background-color: #fff;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.danhGia__cus{
+    padding: 20px 0;
+    position: relative;
+}
+
+.danhGia__cus::after{
+    content: "";
+    width: 80%;
+    height: 1px;
+    background-color: rgba(77,78,84,.7);
+    display: block;
+    position: absolute;
+    left: 110px;
+    bottom: 10px;
+}
+
+.danhGia__cus p{
+    word-wrap:  break-word;
+}
