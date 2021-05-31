@@ -23,19 +23,6 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
-        //public IActionResult Index()
-        //{
-
-        //    string email = User.FindFirst(ClaimTypes.Email).Value;
-        //    var model = new ViewModelNV
-        //    {
-        //        nhanVien = database.NhanViens.Where(x => x.Email == email).FirstOrDefault(),
-        //        ListNhanVien = database.NhanViens.ToArray(),
-        //        ListType = database.TypeAccs.ToArray()
-        //    };
-
-        //    return View(model);
-        //}
 
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
@@ -74,11 +61,11 @@ namespace Web_BanXeMoTo.Controllers
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        ModelList = model.OrderByDescending(s => s.TenNv).ToList();
+                        ModelList = model.OrderByDescending(s => s.Idnv).ToList();
                         break;
 
                     default:
-                        ModelList = model.OrderBy(s => s.TenNv).ToList();
+                        ModelList = model.OrderBy(s => s.Idnv).ToList();
                         break;
                 }
 
@@ -134,7 +121,7 @@ namespace Web_BanXeMoTo.Controllers
                 string wwwRootPath = hostEnvironment.WebRootPath;
                 string fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UploadHinh.FileName);
                 string extension1 = Path.GetExtension(nhanVien.UploadHinh.FileName);
-                nhanVien.Avatar = fileName1 += extension1;
+                nhanVien.Avatar = "/img/" + fileName1 + extension1;
                 string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                 using (var fileStream = new FileStream(path1, FileMode.Create))
                 {
@@ -181,7 +168,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName1 = Path.GetFileNameWithoutExtension(nhanVien.UploadHinh.FileName);
                     extension1 = Path.GetExtension(nhanVien.UploadHinh.FileName);
-                    model.nhanVien.Avatar = fileName1 += extension1;
+                    model.nhanVien.Avatar = "/img/" + fileName1 +  extension1;
                     string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                     using (var fileStream = new FileStream(path1, FileMode.Create))
                     {

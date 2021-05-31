@@ -34,18 +34,13 @@
         </li>
     </ul>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-7">
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <form asp-action="Create" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="xe.Idxe" class="control-label"></label>
-                            <input asp-for="xe.Idxe" class="form-control" />
-                            <span asp-validation-for="xe.Idxe" class="text-danger"></span>
-                        </div>
                         <div class="position-relative form-group">
-                            <label asp-for="xe.Idmau" class="control-label"></label>
+                            <label class="control-label">Tên xe</label>
                             <select asp-for="xe.Idmau" class="form-control">
                                 @foreach (var item in Model.ListMauXe)
                                 {

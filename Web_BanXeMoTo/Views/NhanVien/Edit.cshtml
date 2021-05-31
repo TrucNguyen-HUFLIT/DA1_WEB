@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <div class="card-img ">
                                 @*<img src="@(Model.nhanVien.Avt != null? Url.Content(Model.nhanVien.Avt) :"/img/icon.png")" height="200" width="200" id="previewImg" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />*@
-                                <img src="@(Model.nhanVien != null? Url.Content("/img/"+Model.nhanVien.Avatar) :"/img/icon.png")" id="output" height="200" width="200" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />
+                                <img src="@(Model.nhanVien != null? Url.Content(Model.nhanVien.Avatar) :"/img/icon.png")" id="output" height="200" width="200" style="margin-left: auto; width: 100%; margin-right: auto; max-width: 240px; display: block;" />
                             </div>
                         </div>
 

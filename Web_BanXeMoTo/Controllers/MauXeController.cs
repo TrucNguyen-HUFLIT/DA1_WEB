@@ -125,9 +125,9 @@ namespace Web_BanXeMoTo.Controllers
                 string extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
                 string extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
 
-                mauXe.HinhAnh1 = fileName1 += extension1;
-                mauXe.HinhAnh2 = fileName2 += extension2;
-                mauXe.HinhAnh3 = fileName3 += extension3;
+                mauXe.HinhAnh1 = "/img/" + fileName1 + extension1;
+                mauXe.HinhAnh2 = "/img/" + fileName2 + extension2;
+                mauXe.HinhAnh3 = "/img/" + fileName3 + extension3;
 
                 string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                 string path2 = Path.Combine(wwwRootPath + "/img/", fileName2);
@@ -224,7 +224,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName1 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh1.FileName);
                     extension1 = Path.GetExtension(mauXe.UploadHinh1.FileName);
-                    model.mauXe.HinhAnh1 = fileName1 += extension1;
+                    model.mauXe.HinhAnh1 = "/img/" + fileName1 + extension1;
                     string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                     using (var fileStream = new FileStream(path1, FileMode.Create))
                     {
@@ -235,7 +235,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName2 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh2.FileName);
                     extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
-                    model.mauXe.HinhAnh2 = fileName2 += extension2;
+                    model.mauXe.HinhAnh2 = "/img/" + fileName2 +  extension2;
                     string path2 = Path.Combine(wwwRootPath + "/img/", fileName2);
                     using (var fileStream = new FileStream(path2, FileMode.Create))
                     {
@@ -247,7 +247,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName3 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh3.FileName);
                     extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
-                    model.mauXe.HinhAnh3 = fileName3 += extension3;
+                    model.mauXe.HinhAnh3 = "/img/" + fileName3 +  extension3;
                     string path3 = Path.Combine(wwwRootPath + "/img/", fileName3);
                     using (var fileStream = new FileStream(path3, FileMode.Create))
                     {

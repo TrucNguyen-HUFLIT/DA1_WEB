@@ -67,11 +67,11 @@ namespace Web_BanXeMoTo.Controllers
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        ModelList = model.OrderByDescending(s => s.TenHang).ToList();
+                        ModelList = model.OrderByDescending(s => s.Idhang).ToList();
                         break;
 
                     default:
-                        ModelList = model.OrderBy(s => s.TenHang).ToList();
+                        ModelList = model.OrderBy(s => s.Idhang).ToList();
                         break;
                 }
 

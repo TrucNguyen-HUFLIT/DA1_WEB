@@ -24,16 +24,6 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
             this.hostEnvironment = hostEnvironment;
         }
-        //public IActionResult Index()
-        //{
-        //    ViewBag.Role = TempData["Role"];
-
-        //    var model = new ViewModel();
-        //    model.ListHang = database.Hangs.ToArray();
-        //    model.ListMauXe = database.MauXes.ToList();
-        //    model.ListKhuyenMai = database.KhuyenMais.ToArray();
-        //    return View(model);
-        //}
 
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
@@ -74,11 +64,11 @@ namespace Web_BanXeMoTo.Controllers
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        ModelList = model.OrderByDescending(s => s.TenXe).ToList();
+                        ModelList = model.OrderByDescending(s => s.Idxe).ToList();
                         break;
 
                     default:
-                        ModelList = model.OrderBy(s => s.TenXe).ToList();
+                        ModelList = model.OrderBy(s => s.Idxe).ToList();
                         break;
                 }
 
@@ -98,14 +88,14 @@ namespace Web_BanXeMoTo.Controllers
             return View(modelv);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ViewBag.Role = TempData["Role"];
 
-            var model = new ViewModel();
-            model.ListMauXe = database.MauXes.ToArray();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
+            var model = new ViewModel
+            {
+                ListMauXe = await database.MauXes.ToArrayAsync()
+            };
             return View(model);
         }
 
@@ -113,161 +103,14 @@ namespace Web_BanXeMoTo.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Xe xe)
         {
-            var model = new ViewModel();
-            model.ListMauXe = database.MauXes.ToArray();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            if (ModelState.IsValid)
-            {
-                /*#region Save Image from wwwroot/img
-                string wwwRootPath = hostEnvironment.WebRootPath;
-                string fileName1 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh1.FileName);
-                string fileName2 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh2.FileName);
-                string fileName3 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh3.FileName);
-
-                string extension1 = Path.GetExtension(mauXe.UploadHinh1.FileName);
-                string extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
-                string extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
-
-                mauXe.HinhAnh1 = fileName1 += extension1;
-                mauXe.HinhAnh2 = fileName2 += extension2;
-                mauXe.HinhAnh3 = fileName3 += extension3;
-
-                string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
-                string path2 = Path.Combine(wwwRootPath + "/img/", fileName2);
-                string path3 = Path.Combine(wwwRootPath + "/img/", fileName3);
-
-
-                using (var fileStream = new FileStream(path1, FileMode.Create))
-                {
-                    await mauXe.UploadHinh1.CopyToAsync(fileStream);
-                }
-                using (var fileStream = new FileStream(path2, FileMode.Create))
-                {
-                    await mauXe.UploadHinh2.CopyToAsync(fileStream);
-                }
-                using (var fileStream = new FileStream(path3, FileMode.Create))
-                {
-                    await mauXe.UploadHinh3.CopyToAsync(fileStream);
-                }
-                #endregion*/
-
-                xe.TenXe = database.MauXes.Where(s => s.Idmau == xe.Idmau).FirstOrDefault().TenXe;
-                xe.TrangThai = true;
-                database.Add(xe);
-                await database.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
-
-        public IActionResult Details(string id)
-        {
-            ViewBag.Role = TempData["Role"];
-
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
-            return View(model);
-        }
-
-        public IActionResult Delete(string id)
-        {
-            ViewBag.Role = TempData["Role"];
-
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult Delete(string id, MauXe mauXe)
-        {
-            mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
-            database.Remove(mauXe);
-            database.SaveChanges();
+            xe.TenXe = await database.MauXes.Where(s => s.Idmau == xe.Idmau).Select(x => x.TenXe).FirstOrDefaultAsync();
+            int length = database.Xes.Where(s => s.Idmau == xe.Idmau).ToArray().Length + 1;
+            xe.Idxe = xe.TenXe + "-" + length;
+            xe.TrangThai = true;
+            database.Add(xe);
+            await database.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(string id)
-        {
-            ViewBag.Role = TempData["Role"];
-
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListMauXe = database.MauXes.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(string id, MauXe mauXe)
-        {
-            var model = new ViewModel();
-            model.ListHang = database.Hangs.ToArray();
-            model.ListKhuyenMai = database.KhuyenMais.ToArray();
-            model.mauXe = database.MauXes.Where(x => x.Idmau == id).FirstOrDefault();
-            if (mauXe.TenXe != null && mauXe.MoTa != null && mauXe.BaoHanh > 0 && mauXe.GiaBan >= 1000)
-            {
-                model.mauXe.TenXe = mauXe.TenXe;
-                model.mauXe.Idhang = mauXe.Idhang;
-                model.mauXe.Idkm = mauXe.Idkm;
-                model.mauXe.BaoHanh = mauXe.BaoHanh;
-                model.mauXe.GiaBan = mauXe.GiaBan;
-                model.mauXe.MoTa = mauXe.MoTa;
-                model.mauXe.TrangThai = mauXe.TrangThai;
-
-                #region Save Image from wwwroot/img
-                string wwwRootPath = hostEnvironment.WebRootPath;
-
-                string fileName1, fileName2, fileName3;
-                string extension1, extension2, extension3;
-                if (mauXe.UploadHinh1 != null)
-                {
-                    fileName1 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh1.FileName);
-                    extension1 = Path.GetExtension(mauXe.UploadHinh1.FileName);
-                    model.mauXe.HinhAnh1 = fileName1 += extension1;
-                    string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
-                    using (var fileStream = new FileStream(path1, FileMode.Create))
-                    {
-                        await mauXe.UploadHinh1.CopyToAsync(fileStream);
-                    }
-                }
-                if (mauXe.UploadHinh2 != null)
-                {
-                    fileName2 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh2.FileName);
-                    extension2 = Path.GetExtension(mauXe.UploadHinh2.FileName);
-                    model.mauXe.HinhAnh2 = fileName2 += extension2;
-                    string path2 = Path.Combine(wwwRootPath + "/img/", fileName2);
-                    using (var fileStream = new FileStream(path2, FileMode.Create))
-                    {
-                        await mauXe.UploadHinh2.CopyToAsync(fileStream);
-                    }
-                }
-
-                if (mauXe.UploadHinh3 != null)
-                {
-                    fileName3 = Path.GetFileNameWithoutExtension(mauXe.UploadHinh3.FileName);
-                    extension3 = Path.GetExtension(mauXe.UploadHinh3.FileName);
-                    model.mauXe.HinhAnh3 = fileName3 += extension3;
-                    string path3 = Path.Combine(wwwRootPath + "/img/", fileName3);
-                    using (var fileStream = new FileStream(path3, FileMode.Create))
-                    {
-                        await mauXe.UploadHinh3.CopyToAsync(fileStream);
-                    }
-                }
-
-
-                #endregion
-                database.Update(model.mauXe);
-                await database.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
     }
 }

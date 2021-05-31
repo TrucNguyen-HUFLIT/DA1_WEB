@@ -488,9 +488,6 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Web_
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.TagHelpers.output.cache
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Web_BanXeMoTo.RazorCoreGenerate.cache
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Booking\Index.cshtml.g.cs
-F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Detail.cshtml.g.cs
-F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Edit.cshtml.g.cs
-F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Index.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\Create.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\Delete.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\Details.cshtml.g.cs
@@ -3212,3 +3209,5 @@ D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Raz
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\Details.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Login\Register.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Login\Reset.cshtml.g.cs
