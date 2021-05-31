@@ -37,8 +37,9 @@
                 <div class="card-body">
                     @using (Html.BeginForm("Index", "MauXe", FormMethod.Get, new { @style = "float: right; width: 40%" }))
                     {
-        <input type="text" id="searchString" name="searchString" placeholder="Find by name or email">
-                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />}
+                        <input type="text" id="searchString" name="searchString" placeholder="Find by id or name">
+                        <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />
+                    }
                     <br />
                     <table class="table table-hover table-sm">
                         <thead>
@@ -90,9 +91,10 @@
                         {
                             if (hang.Idhang == item.Idhang)
                             {
-        @hang.TenHang break;
-    }
-}
+                                @hang.TenHang
+                                break;
+                            }
+                        }
                     </td>
 
                     <td>
@@ -130,7 +132,6 @@
 }
                         </tbody>
                     </table>
-                    Page @(Model.ListMauXes.PageCount < Model.ListMauXes.PageNumber ? 0 : Model.ListMauXes.PageNumber) of @Model.ListMauXes.PageCount
 
                     @Html.PagedListPager(Model.ListMauXes, page => Url.Action("Index",
                                                       new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

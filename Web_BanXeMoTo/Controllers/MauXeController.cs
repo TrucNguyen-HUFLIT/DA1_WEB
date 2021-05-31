@@ -40,6 +40,7 @@ namespace Web_BanXeMoTo.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
+                ViewBag.Role = TempData["Role"];
 
             var ModelList = new List<MauXe>();
 
@@ -269,6 +270,7 @@ namespace Web_BanXeMoTo.Controllers
         //Create Model to use Multiple Model in View
         public Xe[] ListXe { get; set; }
 
+        public Xe xe { get; set; }
         public Hang hang { get; set; }
         public KhuyenMai khuyenMai { get; set; }
         public MauXe mauXe { get; set; }
@@ -283,6 +285,10 @@ namespace Web_BanXeMoTo.Controllers
         public ChiTietDg[] ListChiTietDg { get; set; }
 
         public IPagedList<MauXe> ListMauXes { get; set; }
+        public IPagedList<Hang> ListHangs { get; set; }
+
+        public IPagedList<Xe> ListXes { get; set; }
+
     }
 
 }

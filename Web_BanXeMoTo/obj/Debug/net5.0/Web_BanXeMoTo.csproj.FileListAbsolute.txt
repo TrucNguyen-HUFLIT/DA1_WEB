@@ -3205,3 +3205,13 @@ F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razo
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\bin\Debug\net5.0\JetBrains.Annotations.dll
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.dll
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\bin\Debug\net5.0\JetBrains.Annotations.dll
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.dll
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\bin\Debug\net5.0\X.PagedList.Mvc.Core.dll
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\DanhSachChoXacNhan.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\DanhSachHomNay.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\Create.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\CTHD.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\HoaDon\Details.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Login\Register.cshtml.g.cs
+D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs
