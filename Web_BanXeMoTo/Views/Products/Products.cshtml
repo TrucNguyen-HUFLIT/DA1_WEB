@@ -53,7 +53,7 @@
                                     {
                                         <div class="col-md-4">
                                             <div class="filtr-item">
-                                                <img src="@("/img/" + mau.HinhAnh1)" alt="package-place" />
+                                                <img src="@mau.HinhAnh1" alt="package-place" />
                                                 <div class="item-title">
                                                     <a asp-action="Query_Hang" asp-route-id="@mau.Idhang">
                                                         <h3>@Html.DisplayFor(model => hang.TenHang)<br /></h3>
@@ -134,7 +134,7 @@
                                     {
                                         <div class="col-md-4 col-sm-6">
                                             <div class="single-package-item">
-                                                <i><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau"><img src="@("/img/" + mau.HinhAnh1)" alt="package-place" /></a></i>
+                                                <i><a asp-action="ProductsDetail" asp-route-id="@mau.Idmau"><img src="@mau.HinhAnh1" alt="package-place" /></a></i>
                                                 <div class="single-package-item-txt">
                                                     <h3>@Html.DisplayFor(model => mau.TenXe)<br /><span class="pull-right">@string.Format("{0:N0}", ((int)mau.GiaBan)) VNĐ</span></h3>
                                                     <div class="packages-para">

@@ -41,11 +41,9 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <label class="control-label">@Html.ActionLink("ID Mẫu", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
+                                    <label class="control-label">@Html.ActionLink("ID Khách hàng", "Index", new { sortOrder = ViewBag.NameSortParm })</label>
                                 </th>
-                                <th>
-                                    <label class="control-label">Hình</label>
-                                </th>
+
                                 <th>
                                     <label asp-for="khachHang.TenKh" class="control-label"></label>
                                 </th>
@@ -60,34 +58,35 @@
                                 <th class="text-center">
                                     <label asp-for="khachHang.Email" class="control-label"></label>
                                 </th>
-                                <th></th>
+                                <th>
+                                    <label class="control-label">Hình</label>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var khachhang in Model.ListKhachHangs)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(khachHang => khachhang.Idkh)
-                                    </td>
-                                    <td>
-                                        <img src="@("/img/" + khachhang.Avatar)" width="120" height="90" />
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(khachHang => khachhang.TenKh)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(khachHang => khachhang.DienThoai)
-                                    </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(khachHang => khachhang.Idkh)
+                                </td>
 
-
-                                    <td>
-                                        @Html.DisplayFor(khachHang => khachhang.DiaChi)
-                                    </td>
-                                    <td>
-                                        @khachhang.Email
-                                    </td>
-                                </tr>
+                                <td>
+                                    @Html.DisplayFor(khachHang => khachhang.TenKh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(khachHang => khachhang.DienThoai)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(khachHang => khachhang.DiaChi)
+                                </td>
+                                <td>
+                                    @khachhang.Email
+                                </td>
+                                <td>
+                                    <img src="@khachhang.Avatar" width="120" height="90" />
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

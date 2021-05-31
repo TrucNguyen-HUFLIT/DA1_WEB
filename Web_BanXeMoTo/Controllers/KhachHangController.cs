@@ -62,11 +62,11 @@ namespace Web_BanXeMoTo.Controllers
                 switch (sortOrder)
                 {
                     case "name_desc":
-                        ModelList = model.OrderByDescending(s => s.TenKh).ToList();
+                        ModelList = model.OrderByDescending(s => s.Idkh).ToList();
                         break;
 
                     default:
-                        ModelList = model.OrderBy(s => s.TenKh).ToList();
+                        ModelList = model.OrderBy(s => s.Idkh).ToList();
                         break;
                 }
 
@@ -107,7 +107,7 @@ namespace Web_BanXeMoTo.Controllers
                 model.khachHang.Pass = khachHang.Pass;
                 model.khachHang.DienThoai = khachHang.DienThoai;
                 model.khachHang.DiaChi = khachHang.DiaChi;
-              
+
                 string wwwRootPath = hostEnvironment.WebRootPath;
 
                 string fileName1;
@@ -116,7 +116,7 @@ namespace Web_BanXeMoTo.Controllers
                 {
                     fileName1 = Path.GetFileNameWithoutExtension(khachHang.UploadHinh.FileName);
                     extension1 = Path.GetExtension(khachHang.UploadHinh.FileName);
-                    model.khachHang.Avatar = fileName1 += extension1;
+                    model.khachHang.Avatar = "/img/" + fileName1 + extension1;
                     string path1 = Path.Combine(wwwRootPath + "/img/", fileName1);
                     using (var fileStream = new FileStream(path1, FileMode.Create))
                     {
@@ -129,7 +129,7 @@ namespace Web_BanXeMoTo.Controllers
             }
             return View(model);
         }
-        
+
     }
     public class ViewModelKH
     {

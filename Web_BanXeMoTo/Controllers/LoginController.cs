@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -28,14 +30,14 @@ namespace Web_BanXeMoTo.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var modelNV = database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
-            var modelKH = database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefault();
+            var modelNV = await database.NhanViens.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefaultAsync();
+            var modelKH = await database.KhachHangs.Where(x => x.Email == loginModel.Email && x.Pass == loginModel.Password).FirstOrDefaultAsync();
             if (modelNV != null)
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, loginModel.Email),
-                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==modelNV.Idtype).FirstOrDefault().Name),
+                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==modelNV.Idtype).Select(x=>x.Name).FirstOrDefault()),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -51,7 +53,7 @@ namespace Web_BanXeMoTo.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, loginModel.Email),
-                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==modelKH.Idtype).FirstOrDefault().Name),
+                    new Claim(ClaimTypes.Role, database.TypeAccs.Where(x=>x.Idtype==modelKH.Idtype).Select(x=>x.Name).FirstOrDefault()),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -85,7 +87,7 @@ namespace Web_BanXeMoTo.Controllers
                 }
                 var model = new KhachHang
                 {
-                    Idkh = database.KhachHangs.ToArray()[^1].Idkh + 1,
+                    Idkh =  database.KhachHangs.ToArray()[^1].Idkh + 1,
                     TenKh = registerModels.Email,
                     Email = registerModels.Email,
                     Pass = registerModels.Password,
@@ -101,6 +103,41 @@ namespace Web_BanXeMoTo.Controllers
             }
             return View(registerModels);
         }
+
+        [HttpGet]
+        public IActionResult Reset()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reset(ResetModel resetModel)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var model = await database.KhachHangs.Where(x => x.Email == resetModel.Email).FirstOrDefaultAsync();
+                if (model == null)
+                {
+                    ViewBag.error = "Email không tồn tại trong hệ thống!";
+                    return View(resetModel);
+                }
+
+                //model.pass đã được set new password
+                model.Pass = GetPasswordRandom();
+                database.KhachHangs.Update(model);
+                await database.SaveChangesAsync();
+
+                #region Send mail
+
+                #endregion
+
+                return View("Login");
+            }
+            return View(resetModel);
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
@@ -119,6 +156,17 @@ namespace Web_BanXeMoTo.Controllers
                 StaticAcc.TypeAcc = "";
                 return RedirectToAction("Login");
             }
+        }
+
+        public string GetPasswordRandom() 
+        {
+            Random rnd = new Random();
+            string value = "";
+            for (int i = 0; i < 6; i++)
+            {
+                value += rnd.Next(0, 9).ToString();
+            }
+            return value;
         }
     }
 }

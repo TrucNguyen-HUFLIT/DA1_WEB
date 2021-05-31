@@ -1,4 +1,4 @@
-﻿@model Web_BanXeMoTo.Models.LoginModel
+﻿@model Web_BanXeMoTo.Models.ResetModel
 @{
     ViewData["Title"] = "Login";
     Layout = null;
@@ -43,28 +43,24 @@
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
                                     <span class="text-danger" style="font-size:20px">@ViewBag.error</span>
-                                    <form class="user" asp-action="Login" enctype="multipart/form-data">
+                                    <form class="user" asp-action="Reset" enctype="multipart/form-data">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <div class="form-group">
                                             <input asp-for="Email" class="form-control form-control-user"
                                                    placeholder="Email Address...">
                                             <span asp-validation-for="Email" class="text-danger"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <input asp-for="Password" class="form-control form-control-user"
-                                                   placeholder="Password">
-                                            <span asp-validation-for="Password" class="text-danger" style="display:block"></span>
-                                            <a class="small" asp-controller="Login" asp-action="Reset">Forgot password?</a>
+                                        <label class="text-danger">"Check your email for a new password!"</label>
 
-                                        </div>
-
-                                        <input type="submit" value="Login" class="btn btn-primary btn-user btn-block" />
+                                        <input type="submit" value="Reset" class="btn btn-primary btn-user btn-block" />
                                         <hr>
                                     </form>
                                     <div class="text-center">
                                         <a class="small" asp-controller="Login" asp-action="Register">Create an Account!</a>
                                     </div>
-
+                                    <div class="text-center">
+                                        <a class="small" asp-controller="Login" asp-action="Login">Already have an account? Login!</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
