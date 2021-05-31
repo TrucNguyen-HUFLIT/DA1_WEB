@@ -286,8 +286,8 @@ namespace Web_BanXeMoTo.Controllers
 
         public IPagedList<MauXe> ListMauXes { get; set; }
         public IPagedList<Hang> ListHangs { get; set; }
-
         public IPagedList<Xe> ListXes { get; set; }
+        public IPagedList<KhachHang> ListKhachHangs { get; set; }
 
     }
 

@@ -1717,9 +1717,6 @@ D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Raz
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Booking\Delete.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Booking\Edit.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Booking\Index.cshtml.g.cs
-D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Detail.cshtml.g.cs
-D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Edit.cshtml.g.cs
-D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Customer\Index.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\Create.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\Delete.cshtml.g.cs
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\DatLiches\Details.cshtml.g.cs
