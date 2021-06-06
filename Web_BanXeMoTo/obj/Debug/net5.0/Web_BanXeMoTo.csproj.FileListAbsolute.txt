@@ -3211,3 +3211,5 @@ D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Raz
 D:\SCHOOLS\HUFLIT\Do An 01\PF_Project\DA1_WEB\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Xe\Create.cshtml.g.cs
 F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\Login\Reset.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Index.cshtml.g.cs
+F:\HUFLIT-EDU\năm3\Semester2\DA1-CNPMNC\DA1\Web_BanXeMoTo\obj\Debug\net5.0\Razor\Views\ThongKe\Details.cshtml.g.cs

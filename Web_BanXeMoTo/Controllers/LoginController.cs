@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,7 +131,29 @@ namespace Web_BanXeMoTo.Controllers
                 await database.SaveChangesAsync();
 
                 #region Send mail
+                MimeMessage message = new MimeMessage();
 
+                MailboxAddress from = new MailboxAddress("Admin",
+                "lanam.9907704@gmail.com");
+                message.From.Add(from);
+
+                MailboxAddress to = new MailboxAddress("User", model.Email);
+                message.To.Add(to);
+
+                message.Subject = "Reset Mật khẩu thành công";
+                BodyBuilder bodyBuilder = new BodyBuilder();
+                bodyBuilder.HtmlBody = $"<h1>Mật khẩu của bạn đã được reset, mật khẩu mới: {model.Pass}  </h1>";
+                bodyBuilder.TextBody = "Mật Khẩu của bạn đã được thay đổi ";
+                message.Body = bodyBuilder.ToMessageBody();
+                // xac thuc email
+                SmtpClient client = new SmtpClient();
+                //connect (smtp address, port , true)
+                client.Connect("smtp.gmail.com", 465, true);
+                client.Authenticate("lanam.990704@gmail.com", "qceonpbfjcgpdvoa");
+                //send email
+                client.Send(message);
+                client.Disconnect(true);
+                client.Dispose();
                 #endregion
 
                 return View("Login");
