@@ -39,7 +39,13 @@ namespace Web_BanXeMoTo.Controllers
                     model.ListMauXe = database.MauXes.ToArray();
                     model.khachHang = database.KhachHangs.Where(x => x.Email == email).FirstOrDefault();
                     model.ListType = database.TypeAccs.ToArray();
-
+                    if (model.khachHang == null)
+                    {
+                        StaticAcc.Avatar = "";
+                        StaticAcc.Name = "";
+                        StaticAcc.TypeAcc = "";
+                        return View(model);
+                    }
                     StaticAcc.Avatar = model.khachHang.Avatar;
                     StaticAcc.Name = model.khachHang.TenKh; 
                     StaticAcc.TypeAcc = database.TypeAccs.Where(x => x.Idtype == model.khachHang.Idtype).Select(x => x.Name).FirstOrDefault();

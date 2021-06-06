@@ -118,9 +118,9 @@
                                 <li>
                                     @Html.ActionLink("Quản lý Hãng xe", "Index", "Hang")
                                 </li>
-                                                <li>
-                                                    <a @*href="@Url.ActionLink("Index", "MauXe")"*@ >Quản lý Giá</a>
-                                                </li>
+                                                @*<li>
+                                                    <a href="@Url.ActionLink("Index", "MauXe")" >Quản lý Giá</a>
+                                                </li>*@
                                                                 <li>
                                                                     @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
                                                                 </li>
@@ -135,7 +135,7 @@
                                                                                                                                     Thống kê
                                                                                                                                 </li>
                                                                                                                                                 <li class="btn-active">
-                                                                                                                                                    @Html.ActionLink("Thống kê doanh số", "MauXe")
+                                                                                                                                                    @Html.ActionLink("Thống kê doanh số", "Index","ThongKe")
                                                                                                                                                 </li>
  }
                                                                                                                                             else if (Web_BanXeMoTo.Models.StaticAcc.TypeAcc == "staff")
@@ -143,9 +143,9 @@
                                                                                                                                 <li>
                                                                                                                                     @Html.ActionLink("Quản lý Hóa đơn", "Index", "HoaDon")
                                                                                                                                 </li>
-                                                                                                                                                <li>
+                                                                                                                                                @*<li>
                                                                                                                                                     @Html.ActionLink("Quản lý Bán hàng", "MauXe")
-                                                                                                                                                </li>
+                                                                                                                                                </li>*@
                                                                                                                                                                 <li>
                                                                                                                                                                     @Html.ActionLink("Quản lý Đặt Lịch", "Index", "DatLiches")
                                                                                                                                                                 </li>

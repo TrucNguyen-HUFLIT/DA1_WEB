@@ -19,15 +19,6 @@ namespace Web_BanXeMoTo.Controllers
             database = db;
         }
         
-        //public IActionResult Index()
-        //{
-        //    ViewBag.Role = TempData["Role"];
-        //    var model = new ViewModel();
-        //    model.ListHang = database.Hangs.ToArray();
-        //    model.ListMauXe = database.MauXes.ToArray();
-        //    return View(model);
-        //}
-
         public IActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             //A ViewBag property provides the view with the current sort order, because this must be included in 
